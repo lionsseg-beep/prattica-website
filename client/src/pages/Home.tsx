@@ -92,8 +92,56 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Featured Product: Athena Clinic SO */}
+      <section className="py-20 bg-[#1a1a1a] border-b border-white/5 relative overflow-hidden">
+        <div className="container relative z-10">
+          <div className="bg-gradient-to-r from-[#00C2A0]/10 to-transparent rounded-3xl p-8 md:p-12 border border-[#00C2A0]/20">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <div>
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#00C2A0] text-black text-xs font-bold uppercase tracking-wider mb-6">
+                  Novo Produto
+                </div>
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">Athena Clinic SO</h2>
+                <p className="text-xl text-gray-300 mb-6">
+                  O primeiro Sistema Operacional para clínicas com IA nativa. Do agendamento ao laudo, automatize 100% da jornada do paciente.
+                </p>
+                <ul className="space-y-3 mb-8">
+                  <li className="flex items-center gap-3 text-gray-400">
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#00C2A0]"></div>
+                    Atendimento e triagem via IA
+                  </li>
+                  <li className="flex items-center gap-3 text-gray-400">
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#00C2A0]"></div>
+                    Geração automática de laudos
+                  </li>
+                  <li className="flex items-center gap-3 text-gray-400">
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#00C2A0]"></div>
+                    Gestão financeira integrada
+                  </li>
+                </ul>
+                <Link href="/produtos">
+                  <Button className="bg-[#00C2A0] text-black hover:bg-[#00A085] rounded-full px-8">
+                    Conhecer o Athena Clinic
+                  </Button>
+                </Link>
+              </div>
+              <div className="relative h-[300px] bg-[#111] rounded-xl border border-white/10 shadow-2xl overflow-hidden flex items-center justify-center group">
+                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=2070&auto=format&fit=crop')] bg-cover opacity-20 group-hover:opacity-30 transition-opacity duration-500"></div>
+                <div className="relative z-10 text-center">
+                  <div className="w-20 h-20 bg-[#00C2A0] rounded-2xl mx-auto mb-4 flex items-center justify-center text-black font-bold text-3xl shadow-[0_0_30px_rgba(0,194,160,0.4)]">
+                    A
+                  </div>
+                  <h3 className="text-2xl font-bold text-white">Athena Clinic</h3>
+                  <p className="text-[#00C2A0] text-sm uppercase tracking-widest mt-2">Operating System</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Value Proposition / Stats */}
-      <section className="py-20 border-y border-white/5 bg-[#1a1a1a]">
+      <section className="py-20 border-y border-white/5 bg-[#171717]">
         <div className="container">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[

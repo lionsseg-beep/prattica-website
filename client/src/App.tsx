@@ -11,11 +11,13 @@ import Metodologia from "./pages/Metodologia";
 import Academy from "./pages/Academy";
 import Radar from "./pages/Radar";
 import Contato from "./pages/Contato";
+import Produtos from "./pages/Produtos";
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/produtos" component={Produtos} />
       <Route path="/sobre" component={Sobre} />
       <Route path="/solucoes" component={Solucoes} />
       <Route path="/metodologia" component={Metodologia} />

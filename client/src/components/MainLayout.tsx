@@ -19,6 +19,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
   }, []);
 
   const navLinks = [
+    { name: "Produtos", href: "/produtos" },
     { name: "Sobre", href: "/sobre" },
     { name: "Soluções", href: "/solucoes" },
     { name: "Metodologia", href: "/metodologia" },
