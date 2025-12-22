@@ -2,10 +2,15 @@ import MainLayout from "@/components/MainLayout";
 import { Button } from "@/components/ui/button";
 import { Check, ArrowRight, Stethoscope, Activity, FileText, MessageSquare } from "lucide-react";
 import { Link } from "wouter";
+import SchemaOrgProdutos from "@/components/SchemaOrgProdutos";
+import SchemaOrgAthenaClinc from "@/components/SchemaOrgAthenaClinc";
 
 export default function Produtos() {
   return (
-    <MainLayout>
+    <>
+      <SchemaOrgProdutos />
+      <SchemaOrgAthenaClinc />
+      <MainLayout>
       {/* Hero Section Produtos */}
       <section className="pt-32 pb-20 bg-[#171717] relative overflow-hidden">
         <div className="container relative z-10">
@@ -162,5 +167,6 @@ export default function Produtos() {
         </div>
       </section>
     </MainLayout>
+    </>
   );
 }

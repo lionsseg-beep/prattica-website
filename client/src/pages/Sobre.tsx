@@ -1,5 +1,5 @@
 import MainLayout from "@/components/MainLayout";
-import { Users, Target, Heart, Award, ArrowRight } from "lucide-react";
+import { Target, Award } from "lucide-react";
 
 export default function Sobre() {
   return (
@@ -75,38 +75,7 @@ export default function Sobre() {
         </div>
       </section>
 
-      {/* Time (Placeholder) */}
-      <section className="py-32 bg-[#111111] border-t border-white/5">
-        <div className="container">
-          <div className="flex items-center justify-between mb-16">
-            <h2 className="text-4xl font-bold">Liderança</h2>
-            <div className="flex gap-2">
-              <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/5 cursor-pointer transition-colors">
-                <ArrowRight className="w-4 h-4 rotate-180" />
-              </div>
-              <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/5 cursor-pointer transition-colors">
-                <ArrowRight className="w-4 h-4" />
-              </div>
-            </div>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            {[1, 2, 3, 4].map((_, i) => (
-              <div key={i} className="group">
-                <div className="aspect-[3/4] bg-[#1a1a1a] rounded-xl mb-4 overflow-hidden relative">
-                  <div className="absolute inset-0 bg-gray-800 animate-pulse"></div>
-                  {/* Placeholder for team photos */}
-                  <div className="absolute inset-0 flex items-center justify-center text-gray-600">
-                    <Users className="w-12 h-12 opacity-20" />
-                  </div>
-                </div>
-                <h3 className="text-lg font-bold">Nome do Líder</h3>
-                <p className="text-[#00C2A0] text-sm">Cargo / Especialidade</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
     </MainLayout>
   );
 }
