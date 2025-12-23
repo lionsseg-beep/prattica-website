@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  prattica-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: prattica-website
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - VITE_APP_TITLE=Prattica - Inteligência que move decisões
+      - VITE_ANALYTICS_ENDPOINT=${VITE_ANALYTICS_ENDPOINT}
+      - VITE_ANALYTICS_WEBSITE_ID=${VITE_ANALYTICS_WEBSITE_ID}
+    restart: unless-stopped
+    networks:
+      - prattica-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    volumes:
+      - ./dist:/app/dist:ro
+    labels:
+      - "com.prattica.description=Prattica Website"
+      - "com.prattica.version=1.0.0"
+
+  nginx:
+    image: nginx:alpine
+    container_name: prattica-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./dist/public:/usr/share/nginx/html:ro
+      - /etc/ssl/certs:/etc/ssl/certs:ro
+      - /etc/ssl/private:/etc/ssl/private:ro
+    depends_on:
+      - prattica-app
+    restart: unless-stopped
+    networks:
+      - prattica-network
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+networks:
+  prattica-network:
+    driver: bridge
