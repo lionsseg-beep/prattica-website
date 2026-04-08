@@ -1,81 +1,130 @@
 import MainLayout from "@/components/MainLayout";
-import { Target, Award } from "lucide-react";
+import { Target, Eye, Zap, Shield, Brain } from "lucide-react";
 
 export default function Sobre() {
+  const valores = [
+    {
+      icon: <Brain className="w-5 h-5" />,
+      title: "Inteligência Aplicada",
+      desc: "IA não é moda. É ferramenta. Usamos tecnologia para resolver problemas reais de gestão e operação, com resultado mensurável."
+    },
+    {
+      icon: <Zap className="w-5 h-5" />,
+      title: "Execução Rápida",
+      desc: "Diagnóstico profundo, implementação ágil. Não entregamos relatórios — entregamos sistemas funcionando."
+    },
+    {
+      icon: <Shield className="w-5 h-5" />,
+      title: "Transparência Total",
+      desc: "Dados não mentem. Nossa comunicação é direta, baseada em fatos, sem jargão e sem promessas que não podemos cumprir."
+    },
+    {
+      icon: <Target className="w-5 h-5" />,
+      title: "Resultado Mensurável",
+      desc: "Cada projeto tem KPIs definidos. Sabemos exatamente o que entregamos e como medir se funcionou."
+    }
+  ];
+
   return (
     <MainLayout>
-      {/* Header Section */}
-      <section className="pt-32 pb-20 bg-[#171717] relative overflow-hidden">
+      {/* Hero */}
+      <section className="relative pt-28 pb-20 overflow-hidden">
+        <div className="absolute inset-0 bg-grid" />
+        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 60% 50% at 30% 0%, rgba(20,122,120,0.12) 0%, transparent 60%)" }} />
+
         <div className="container relative z-10">
-          <span className="text-[#00C2A0] font-mono text-sm tracking-wider uppercase mb-4 block">Sobre a Prattica</span>
-          <h1 className="text-5xl md:text-7xl font-bold mb-8 max-w-4xl">
-            Construindo o futuro da <span className="text-[#00C2A0]">gestão inteligente</span>.
+          <div className="athena-badge mb-6">Sobre a Prattica AI</div>
+          <h1 style={{ fontFamily: "'Sora', sans-serif", fontWeight: 800, fontSize: "clamp(2.25rem, 5vw, 4.25rem)", color: "#F2EDE8", letterSpacing: "-0.04em", lineHeight: 1.1, marginBottom: "1.5rem", maxWidth: "720px" }}>
+            Consultoria que opera com<br />
+            <span className="text-gradient-teal">inteligência artificial.</span>
           </h1>
-          <p className="text-xl text-gray-400 max-w-2xl leading-relaxed">
-            Somos uma consultoria de nova geração que une a profundidade da estratégia de negócios com a velocidade da automação e inteligência artificial.
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1.125rem", color: "#7a9a9a", lineHeight: 1.7, maxWidth: "620px" }}>
+            A Prattica AI é uma consultoria especializada em processos e gestão que usa automação com agentes de IA para transformar operações complexas em resultados previsíveis. Somos de Campo Grande, MS, e atendemos clientes em todo o Brasil.
           </p>
         </div>
-        
-        {/* Background Elements */}
-        <div className="absolute top-20 right-0 w-1/3 h-full bg-gradient-to-l from-[#00C2A0]/5 to-transparent pointer-events-none"></div>
       </section>
 
       {/* Missão e Visão */}
-      <section className="py-20 bg-[#1a1a1a] border-y border-white/5">
+      <section style={{ background: "#0A1818", borderTop: "1px solid rgba(94,196,188,0.08)", borderBottom: "1px solid rgba(94,196,188,0.08)" }} className="py-20">
         <div className="container">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-            <div>
-              <div className="w-12 h-12 bg-[#00C2A0]/10 rounded-xl flex items-center justify-center mb-6 border border-[#00C2A0]/20">
-                <Target className="w-6 h-6 text-[#00C2A0]" />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div className="card-surface p-10" style={{ background: "#0F1E1E" }}>
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-7" style={{ background: "rgba(29,168,154,0.08)", border: "1px solid rgba(29,168,154,0.15)" }}>
+                <Target className="w-6 h-6" style={{ color: "#1DA89A" }} />
               </div>
-              <h2 className="text-3xl font-bold mb-4">Nossa Missão</h2>
-              <p className="text-gray-400 leading-relaxed text-lg">
-                Democratizar o acesso à inteligência de dados e automação de alta performance, permitindo que líderes tomem decisões baseadas em fatos, não em intuição, e que equipes foquem no estratégico, não no operacional.
+              <h2 style={{ fontFamily: "'Sora', sans-serif", fontWeight: 700, fontSize: "1.625rem", color: "#F2EDE8", marginBottom: "1rem" }}>Nossa Missão</h2>
+              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1rem", color: "#6a8a8a", lineHeight: 1.7 }}>
+                Democratizar o acesso à automação inteligente e à consultoria de alto nível para empresas de todos os portes — permitindo que líderes tomem decisões baseadas em dados e que suas equipes foquem no estratégico, não no operacional.
               </p>
             </div>
-            <div>
-              <div className="w-12 h-12 bg-[#00C2A0]/10 rounded-xl flex items-center justify-center mb-6 border border-[#00C2A0]/20">
-                <Award className="w-6 h-6 text-[#00C2A0]" />
+            <div className="card-surface p-10" style={{ background: "#0F1E1E" }}>
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-7" style={{ background: "rgba(29,168,154,0.08)", border: "1px solid rgba(29,168,154,0.15)" }}>
+                <Eye className="w-6 h-6" style={{ color: "#1DA89A" }} />
               </div>
-              <h2 className="text-3xl font-bold mb-4">Manifesto Legacy</h2>
-              <p className="text-gray-400 leading-relaxed text-lg">
-                Acreditamos que o verdadeiro legado de uma empresa está na eficiência de seus processos e na clareza de sua cultura. Tecnologia sem propósito é custo; com propósito, é alavanca de crescimento exponencial.
+              <h2 style={{ fontFamily: "'Sora', sans-serif", fontWeight: 700, fontSize: "1.625rem", color: "#F2EDE8", marginBottom: "1rem" }}>Nossa Visão</h2>
+              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1rem", color: "#6a8a8a", lineHeight: 1.7 }}>
+                Ser a empresa de referência em automação inteligente no Centro-Oeste, expandindo para todo o Brasil através de produtos SaaS verticalizados — como o Athena Clinic SO — que entregam tecnologia de ponta com a praticidade que o mercado precisa.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Cultura e Valores */}
-      <section className="py-32">
+      {/* Valores */}
+      <section className="py-24">
         <div className="container">
-          <h2 className="text-4xl font-bold mb-16 text-center">Nossa Cultura</h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                title: "Excelência Técnica",
-                desc: "Não aceitamos o 'mais ou menos'. Buscamos a perfeição no código, no design e na estratégia."
-              },
-              {
-                title: "Transparência Radical",
-                desc: "Dados não mentem. Nossa comunicação é direta, baseada em fatos e honestidade intelectual."
-              },
-              {
-                title: "Inovação Pragmática",
-                desc: "Inovamos para resolver problemas reais, não para seguir tendências vazias."
-              }
-            ].map((item, i) => (
-              <div key={i} className="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-[#00C2A0]/50 transition-colors">
-                <h3 className="text-xl font-bold mb-4 text-white">{item.title}</h3>
-                <p className="text-gray-400">{item.desc}</p>
+          <div className="mb-14">
+            <div className="athena-badge mb-5">Valores</div>
+            <h2 style={{ fontFamily: "'Sora', sans-serif", fontWeight: 700, fontSize: "clamp(1.75rem, 4vw, 2.75rem)", color: "#F2EDE8", letterSpacing: "-0.03em" }}>
+              O que nos guia<br />
+              <span className="text-gradient-teal">em cada projeto.</span>
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {valores.map((v, i) => (
+              <div key={i} className="card-surface p-8 flex gap-6 group" style={{ background: "#0F1E1E" }}>
+                <div className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0 mt-1 transition-all duration-300 group-hover:scale-110" style={{ background: "rgba(29,168,154,0.08)", border: "1px solid rgba(29,168,154,0.15)", color: "#1DA89A" }}>
+                  {v.icon}
+                </div>
+                <div>
+                  <h3 style={{ fontFamily: "'Sora', sans-serif", fontWeight: 700, fontSize: "1.125rem", color: "#F2EDE8", marginBottom: "0.5rem" }}>{v.title}</h3>
+                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.9375rem", color: "#6a8a8a", lineHeight: 1.65 }}>{v.desc}</p>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-
+      {/* Localização */}
+      <section style={{ background: "#0A1818", borderTop: "1px solid rgba(94,196,188,0.08)" }} className="py-20">
+        <div className="container">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <div className="athena-badge mb-6">Onde estamos</div>
+              <h2 style={{ fontFamily: "'Sora', sans-serif", fontWeight: 700, fontSize: "2rem", color: "#F2EDE8", marginBottom: "1rem" }}>
+                Campo Grande, MS —<br />com alcance nacional.
+              </h2>
+              <p style={{ fontFamily: "'DM Sans', sans-serif", color: "#6a8a8a", lineHeight: 1.65, marginBottom: "1.5rem" }}>
+                Nossa sede fica no coração de Campo Grande, no Edifício The Place. Atendemos clientes presencialmente no MS e remotamente em todo o Brasil.
+              </p>
+              <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.875rem", color: "#4a6868", lineHeight: 1.6 }}>
+                Av. Afonso Pena, 4785<br />
+                The Place — Torre 2, 20° andar, Sala 2007<br />
+                Campo Grande, MS — CEP 79002-071
+              </p>
+            </div>
+            <div className="rounded-2xl overflow-hidden" style={{ border: "1px solid rgba(94,196,188,0.10)", height: "300px", background: "#0F1E1E", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <div className="text-center">
+                <div style={{ fontFamily: "'Sora', sans-serif", fontSize: "3rem", marginBottom: "0.5rem" }}>📍</div>
+                <p style={{ fontFamily: "'DM Sans', sans-serif", color: "#4a6868", fontSize: "0.875rem" }}>Mapa interativo</p>
+                <p style={{ fontFamily: "'DM Mono', monospace", color: "#2a4444", fontSize: "0.75rem", marginTop: "0.25rem" }}>The Place — Campo Grande, MS</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </MainLayout>
   );
 }
