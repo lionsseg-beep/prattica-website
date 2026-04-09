@@ -5,7 +5,9 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
-import { Mail, Phone, MapPin, Loader2 } from "lucide-react";
+import { Loader2, CheckCircle2 } from "lucide-react";
+
+const WPP = "5567993013370";
 
 interface FormData {
   nome: string;
@@ -18,316 +20,169 @@ interface FormData {
 
 export default function FormularioContato() {
   const [formData, setFormData] = useState<FormData>({
-    nome: "",
-    email: "",
-    telefone: "",
-    empresa: "",
-    assunto: "geral",
-    mensagem: "",
+    nome: "", email: "", telefone: "", empresa: "", assunto: "athena", mensagem: "",
   });
-
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSelectChange = (value: string) => {
-    setFormData((prev) => ({
-      ...prev,
-      assunto: value,
-    }));
-  };
-
-  const validateForm = (): boolean => {
-    if (!formData.nome.trim()) {
-      toast.error("Por favor, insira seu nome");
-      return false;
-    }
-    if (!formData.email.trim() || !formData.email.includes("@")) {
-      toast.error("Por favor, insira um email válido");
-      return false;
-    }
-    if (!formData.telefone.trim()) {
-      toast.error("Por favor, insira seu telefone");
-      return false;
-    }
-    if (!formData.mensagem.trim()) {
-      toast.error("Por favor, insira sua mensagem");
-      return false;
-    }
+  const validate = (): boolean => {
+    if (!formData.nome.trim())   { toast.error("Informe seu nome completo"); return false; }
+    if (!formData.email.includes("@")) { toast.error("Informe um email válido"); return false; }
+    if (!formData.telefone.trim()) { toast.error("Informe seu telefone"); return false; }
+    if (!formData.mensagem.trim()) { toast.error("Escreva sua mensagem"); return false; }
     return true;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (!validateForm()) {
-      return;
-    }
-
+    if (!validate()) return;
     setLoading(true);
 
     try {
-      // TODO: Integrar com serviço de email real (SendGrid, Mailgun, AWS SES)
-      // Por enquanto, simulamos o envio
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      // Envia para WhatsApp com os dados do lead
+      const assuntoMap: Record<string, string> = {
+        athena: "Athena Clinic SO",
+        consultoria: "Consultoria",
+        automacao: "Automação com IA",
+        parceria: "Parceria",
+        outro: "Outro assunto",
+      };
+      const assuntoTexto = assuntoMap[formData.assunto] ?? formData.assunto;
 
-      // Aqui você integraria com sua API de email
-      // const response = await fetch('/api/contact', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(formData)
-      // });
+      const msg = encodeURIComponent(
+        `Olá! Vim pelo site da Prattica AI.\n\n` +
+        `*Nome:* ${formData.nome}\n` +
+        `*Email:* ${formData.email}\n` +
+        `*Telefone:* ${formData.telefone}\n` +
+        (formData.empresa ? `*Empresa:* ${formData.empresa}\n` : "") +
+        `*Assunto:* ${assuntoTexto}\n\n` +
+        `*Mensagem:*\n${formData.mensagem}`
+      );
+
+      // Simula delay de processamento
+      await new Promise(r => setTimeout(r, 800));
 
       setSubmitted(true);
-      toast.success("Mensagem enviada com sucesso! Entraremos em contato em breve.");
+      toast.success("Mensagem recebida! Abrindo WhatsApp...");
 
-      // Reset form
-      setFormData({
-        nome: "",
-        email: "",
-        telefone: "",
-        empresa: "",
-        assunto: "geral",
-        mensagem: "",
-      });
+      // Abre WhatsApp com os dados
+      setTimeout(() => {
+        window.open(`https://wa.me/${WPP}?text=${msg}`, "_blank");
+      }, 600);
 
-      // Reset submitted state after 5 seconds
-      setTimeout(() => setSubmitted(false), 5000);
-    } catch (error) {
-      console.error("Erro ao enviar formulário:", error);
-      toast.error("Erro ao enviar mensagem. Tente novamente mais tarde.");
+      setFormData({ nome: "", email: "", telefone: "", empresa: "", assunto: "athena", mensagem: "" });
+      setTimeout(() => setSubmitted(false), 6000);
+
+    } catch (err) {
+      toast.error("Erro ao enviar. Tente pelo WhatsApp diretamente.");
     } finally {
       setLoading(false);
     }
   };
 
+  const inputStyle = {
+    background: "#F7F7F8",
+    border: "1px solid rgba(27,122,120,0.15)",
+    borderRadius: 8,
+    color: "#1A2B2B",
+    fontFamily: "'DM Sans', sans-serif",
+    fontSize: "0.9375rem",
+  };
+
+  const labelStyle = {
+    fontFamily: "'DM Sans', sans-serif",
+    fontSize: "0.875rem",
+    fontWeight: 500,
+    color: "#0D5252",
+    display: "block",
+    marginBottom: 6,
+  };
+
+  if (submitted) {
+    return (
+      <div style={{ background: "rgba(27,122,120,0.06)", border: "1px solid rgba(27,122,120,0.2)", borderRadius: 16, padding: "2.5rem", textAlign: "center" }}>
+        <CheckCircle2 style={{ width: 48, height: 48, color: "#1B7A78", margin: "0 auto 1rem" }} />
+        <h4 style={{ fontFamily: "'Sora', sans-serif", fontWeight: 700, fontSize: "1.25rem", color: "#0D5252", marginBottom: 8 }}>Mensagem recebida!</h4>
+        <p style={{ fontFamily: "'DM Sans', sans-serif", color: "#4A6868", lineHeight: 1.6 }}>
+          O WhatsApp foi aberto com seus dados. Nossa equipe responde em minutos.
+        </p>
+      </div>
+    );
+  }
+
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-      {/* Formulário */}
+    <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 20 }}>
       <div>
-        <h3 className="text-2xl font-bold mb-8">Envie sua mensagem</h3>
-
-        {submitted ? (
-          <div className="bg-[#00C2A0]/10 border border-[#00C2A0]/30 rounded-2xl p-8 text-center">
-            <div className="text-[#00C2A0] text-4xl mb-4">✓</div>
-            <h4 className="text-xl font-bold mb-2">Obrigado!</h4>
-            <p className="text-gray-400">
-              Recebemos sua mensagem e entraremos em contato em breve.
-            </p>
-          </div>
-        ) : (
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Nome */}
-            <div>
-              <Label htmlFor="nome" className="text-white mb-2 block">
-                Nome Completo *
-              </Label>
-              <Input
-                id="nome"
-                name="nome"
-                value={formData.nome}
-                onChange={handleChange}
-                placeholder="Seu nome"
-                className="bg-white/5 border-white/10 text-white placeholder:text-gray-500"
-                disabled={loading}
-              />
-            </div>
-
-            {/* Email */}
-            <div>
-              <Label htmlFor="email" className="text-white mb-2 block">
-                Email *
-              </Label>
-              <Input
-                id="email"
-                name="email"
-                type="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="seu@email.com"
-                className="bg-white/5 border-white/10 text-white placeholder:text-gray-500"
-                disabled={loading}
-              />
-            </div>
-
-            {/* Telefone */}
-            <div>
-              <Label htmlFor="telefone" className="text-white mb-2 block">
-                Telefone *
-              </Label>
-              <Input
-                id="telefone"
-                name="telefone"
-                value={formData.telefone}
-                onChange={handleChange}
-                placeholder="(11) 99999-9999"
-                className="bg-white/5 border-white/10 text-white placeholder:text-gray-500"
-                disabled={loading}
-              />
-            </div>
-
-            {/* Empresa */}
-            <div>
-              <Label htmlFor="empresa" className="text-white mb-2 block">
-                Empresa
-              </Label>
-              <Input
-                id="empresa"
-                name="empresa"
-                value={formData.empresa}
-                onChange={handleChange}
-                placeholder="Sua empresa"
-                className="bg-white/5 border-white/10 text-white placeholder:text-gray-500"
-                disabled={loading}
-              />
-            </div>
-
-            {/* Assunto */}
-            <div>
-              <Label htmlFor="assunto" className="text-white mb-2 block">
-                Assunto
-              </Label>
-              <Select value={formData.assunto} onValueChange={handleSelectChange} disabled={loading}>
-                <SelectTrigger className="bg-white/5 border-white/10 text-white">
-                  <SelectValue placeholder="Selecione um assunto" />
-                </SelectTrigger>
-                <SelectContent className="bg-[#1a1a1a] border-white/10">
-                  <SelectItem value="geral">Consulta Geral</SelectItem>
-                  <SelectItem value="consultoria">Consultoria</SelectItem>
-                  <SelectItem value="saas">SaaS / Athena Clinic</SelectItem>
-                  <SelectItem value="academy">Academy / Treinamento</SelectItem>
-                  <SelectItem value="parceria">Parceria</SelectItem>
-                  <SelectItem value="outro">Outro</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
-            {/* Mensagem */}
-            <div>
-              <Label htmlFor="mensagem" className="text-white mb-2 block">
-                Mensagem *
-              </Label>
-              <Textarea
-                id="mensagem"
-                name="mensagem"
-                value={formData.mensagem}
-                onChange={handleChange}
-                placeholder="Descreva sua necessidade ou dúvida..."
-                rows={5}
-                className="bg-white/5 border-white/10 text-white placeholder:text-gray-500 resize-none"
-                disabled={loading}
-              />
-            </div>
-
-            {/* Botão Submit */}
-            <Button
-              type="submit"
-              disabled={loading}
-              className="w-full bg-[#00C2A0] hover:bg-[#00C2A0]/90 text-black font-semibold py-3 rounded-xl transition-all"
-            >
-              {loading ? (
-                <>
-                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                  Enviando...
-                </>
-              ) : (
-                "Enviar Mensagem"
-              )}
-            </Button>
-
-            <p className="text-xs text-gray-500 text-center">
-              * Campos obrigatórios. Seus dados serão tratados com confidencialidade.
-            </p>
-          </form>
-        )}
+        <label style={labelStyle}>Nome Completo *</label>
+        <Input name="nome" value={formData.nome} onChange={handleChange} placeholder="Seu nome completo" style={inputStyle} disabled={loading} />
       </div>
 
-      {/* Informações de Contato */}
-      <div>
-        <h3 className="text-2xl font-bold mb-8">Outras formas de contato</h3>
-
-        <div className="space-y-6">
-          {/* Email */}
-          <div className="flex gap-4">
-            <div className="w-12 h-12 bg-[#00C2A0]/10 rounded-xl flex items-center justify-center flex-shrink-0 border border-[#00C2A0]/20">
-              <Mail className="w-6 h-6 text-[#00C2A0]" />
-            </div>
-            <div>
-              <h4 className="font-bold text-white mb-1">Email</h4>
-              <a href="mailto:contato@prattica.ai" className="text-[#00C2A0] hover:underline">
-                contato@prattica.ai
-              </a>
-              <p className="text-sm text-gray-500 mt-1">Respondemos em até 24 horas</p>
-            </div>
-          </div>
-
-          {/* Telefone */}
-          <div className="flex gap-4">
-            <div className="w-12 h-12 bg-[#00C2A0]/10 rounded-xl flex items-center justify-center flex-shrink-0 border border-[#00C2A0]/20">
-              <Phone className="w-6 h-6 text-[#00C2A0]" />
-            </div>
-            <div>
-              <h4 className="font-bold text-white mb-1">Telefone / WhatsApp</h4>
-              <a href="https://wa.me/5511999999999" className="text-[#00C2A0] hover:underline">
-                +55 (11) 99999-9999
-              </a>
-              <p className="text-sm text-gray-500 mt-1">Seg-Sex, 9h às 18h (horário de Brasília)</p>
-            </div>
-          </div>
-
-          {/* Endereço */}
-          <div className="flex gap-4">
-            <div className="w-12 h-12 bg-[#00C2A0]/10 rounded-xl flex items-center justify-center flex-shrink-0 border border-[#00C2A0]/20">
-              <MapPin className="w-6 h-6 text-[#00C2A0]" />
-            </div>
-            <div>
-              <h4 className="font-bold text-white mb-1">Endereço</h4>
-              <p className="text-gray-400">
-                São Paulo, SP<br />
-                Brasil
-              </p>
-            </div>
-          </div>
-
-          {/* Redes Sociais */}
-          <div className="pt-6 border-t border-white/10">
-            <h4 className="font-bold text-white mb-4">Siga-nos</h4>
-            <div className="flex gap-4">
-              <a
-                href="https://linkedin.com/company/prattica"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-[#00C2A0]/20 transition-colors"
-              >
-                <span className="text-[#00C2A0] font-bold">in</span>
-              </a>
-              <a
-                href="https://instagram.com/prattica"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-[#00C2A0]/20 transition-colors"
-              >
-                <span className="text-[#00C2A0] font-bold">@</span>
-              </a>
-              <a
-                href="https://twitter.com/prattica"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-[#00C2A0]/20 transition-colors"
-              >
-                <span className="text-[#00C2A0] font-bold">𝕏</span>
-              </a>
-            </div>
-          </div>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
+        <div>
+          <label style={labelStyle}>Email *</label>
+          <Input name="email" type="email" value={formData.email} onChange={handleChange} placeholder="seu@email.com" style={inputStyle} disabled={loading} />
+        </div>
+        <div>
+          <label style={labelStyle}>Telefone / WhatsApp *</label>
+          <Input name="telefone" value={formData.telefone} onChange={handleChange} placeholder="(67) 99301-3370" style={inputStyle} disabled={loading} />
         </div>
       </div>
-    </div>
+
+      <div>
+        <label style={labelStyle}>Clínica / Empresa</label>
+        <Input name="empresa" value={formData.empresa} onChange={handleChange} placeholder="Nome da sua clínica ou empresa" style={inputStyle} disabled={loading} />
+      </div>
+
+      <div>
+        <label style={labelStyle}>Assunto</label>
+        <Select value={formData.assunto} onValueChange={v => setFormData(p => ({ ...p, assunto: v }))} disabled={loading}>
+          <SelectTrigger style={{ ...inputStyle, width: "100%", height: 40 }}>
+            <SelectValue placeholder="Selecione um assunto" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="athena">Athena Clinic SO — Demonstração</SelectItem>
+            <SelectItem value="consultoria">Consultoria Estratégica</SelectItem>
+            <SelectItem value="automacao">Automação com IA</SelectItem>
+            <SelectItem value="parceria">Parceria</SelectItem>
+            <SelectItem value="outro">Outro</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+
+      <div>
+        <label style={labelStyle}>Mensagem *</label>
+        <Textarea
+          name="mensagem"
+          value={formData.mensagem}
+          onChange={handleChange}
+          placeholder="Conte um pouco sobre sua clínica e o que você precisa..."
+          rows={4}
+          style={{ ...inputStyle, resize: "none" }}
+          disabled={loading}
+        />
+      </div>
+
+      <button
+        type="submit"
+        disabled={loading}
+        className="btn-primary"
+        style={{ width: "100%", justifyContent: "center", fontSize: "1rem", padding: "0.9rem" }}
+      >
+        {loading ? (
+          <><Loader2 style={{ width: 18, height: 18, animation: "spin 1s linear infinite" }} /> Enviando...</>
+        ) : (
+          "Enviar mensagem pelo WhatsApp →"
+        )}
+      </button>
+
+      <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.75rem", color: "#7A9898", textAlign: "center" }}>
+        * Campos obrigatórios. Seus dados são confidenciais e não serão compartilhados.
+      </p>
+    </form>
   );
 }
