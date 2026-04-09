@@ -1,165 +1,244 @@
 import { Link } from "wouter";
 import MainLayout from "@/components/MainLayout";
-import { ArrowRight, Bot, BarChart3, Layers, Zap, CheckCircle2, ChevronRight, MessageSquare, Calendar, DollarSign, Brain } from "lucide-react";
+import AthenaLogo from "@/components/AthenaLogo";
+import { ArrowRight, CheckCircle2, ChevronRight, MessageSquare, Calendar, DollarSign, Brain, BarChart3, Zap, Layers, Bot, X } from "lucide-react";
 
-const WHATSAPP = "5567993013370";
-const WHATSAPP_MSG = encodeURIComponent("Olá! Quero conhecer as soluções da Prattica AI.");
-const WHATSAPP_URL = `https://wa.me/${WHATSAPP}?text=${WHATSAPP_MSG}`;
+const WPP = "5567993013370";
+const WPP_MSG = encodeURIComponent("Olá! Quero conhecer o Athena Clinic SO.");
+const WPP_URL = `https://wa.me/${WPP}?text=${WPP_MSG}`;
 
-function AthenaLogo({ size = 48 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 48 48" fill="none">
-      <polygon points="24,4 44,42 4,42" fill="none" stroke="#1DA89A" strokeWidth="2.5" strokeLinejoin="round"/>
-      <polygon points="24,14 37,38 11,38" fill="#147A78"/>
-      <polygon points="24,22 30,34 18,34" fill="#1DA89A"/>
-    </svg>
-  );
-}
-
-const solutionCards = [
+/* ── DORES — PROBLEMA ── */
+const pains = [
   {
-    icon: <Bot className="w-6 h-6" style={{ color: "#1DA89A" }} />,
-    title: "Agentes de IA",
-    desc: "Agentes autônomos que atendem clientes, qualificam leads e executam processos 24h por dia — sem intervenção humana.",
-    tag: "Atendimento automatizado"
+    icon: "📱",
+    title: "Pacientes sem resposta no WhatsApp",
+    desc: "Sua recepção não dá conta. Cada mensagem ignorada é um paciente que agenda na concorrência."
   },
   {
-    icon: <Zap className="w-6 h-6" style={{ color: "#1DA89A" }} />,
-    title: "Automação de Processos",
-    desc: "Eliminamos tarefas repetitivas com workflows inteligentes integrados aos seus sistemas atuais via API.",
-    tag: "Eficiência operacional"
+    icon: "📋",
+    title: "Agenda bagunçada e faltas sem aviso",
+    desc: "Horários vagos que deveriam estar gerando faturamento. Nenhum sistema de confirmação automática."
   },
   {
-    icon: <BarChart3 className="w-6 h-6" style={{ color: "#1DA89A" }} />,
-    title: "Inteligência de Dados",
-    desc: "Dashboards e relatórios automáticos que transformam dados brutos em decisões estratégicas claras.",
-    tag: "Gestão baseada em dados"
+    icon: "💸",
+    title: "Financeiro no Excel ou no papel",
+    desc: "Você não sabe hoje quanto entrou, quanto saiu nem qual a margem real da sua clínica."
   },
   {
-    icon: <Layers className="w-6 h-6" style={{ color: "#1DA89A" }} />,
-    title: "Consultoria Estratégica",
-    desc: "Diagnóstico profundo dos seus processos e redesenho completo para escalar com segurança e previsibilidade.",
-    tag: "Transformação operacional"
-  }
+    icon: "👥",
+    title: "Mais funcionários para cobrir mais demanda",
+    desc: "Cada novo funcionário aumenta o custo fixo e diminui o lucro. O problema não é de gente — é de processo."
+  },
+  {
+    icon: "🔄",
+    title: "A clínica depende de você para tudo",
+    desc: "Você formou anos para ser médico. Hoje passa metade do dia resolvendo problema de gestão."
+  },
 ];
 
-const athenaFeatures = [
-  { icon: <MessageSquare className="w-5 h-5" />, text: "Agente IA no WhatsApp — atende, agenda e responde pacientes 24/7" },
-  { icon: <Calendar className="w-5 h-5" />, text: "Agendamento inteligente com confirmação automática" },
-  { icon: <Brain className="w-5 h-5" />, text: "Consultor IA: insights e relatórios sob demanda para o dono" },
-  { icon: <DollarSign className="w-5 h-5" />, text: "Gestão financeira completa com integração à maquininha" },
-  { icon: <CheckCircle2 className="w-5 h-5" />, text: "CRM, prontuário eletrônico e controle de comissões" },
-  { icon: <BarChart3 className="w-5 h-5" />, text: "Dashboards em tempo real — saúde financeira da clínica" },
+/* ── FEATURES ── */
+const features = [
+  { icon: <MessageSquare className="w-5 h-5" />, title: "Agente IA no WhatsApp", desc: "Atende, agenda e responde 24h/dia. Zero contato perdido.", tag: "Atendimento" },
+  { icon: <Calendar className="w-5 h-5" />,       title: "Agendamento inteligente", desc: "Confirmação automática, lista de espera, zero falta.", tag: "Agenda" },
+  { icon: <Brain className="w-5 h-5" />,          title: "Consultor IA pessoal", desc: "Insights e relatórios sob demanda para o dono.", tag: "Inteligência" },
+  { icon: <DollarSign className="w-5 h-5" />,     title: "Gestão financeira", desc: "Caixa, comissões, integração com maquininha.", tag: "Financeiro" },
+  { icon: <BarChart3 className="w-5 h-5" />,      title: "Dashboards em tempo real", desc: "Saúde financeira da clínica sempre visível.", tag: "Analytics" },
+  { icon: <Bot className="w-5 h-5" />,            title: "CRM + Prontuário", desc: "Histórico completo, seguro, acessível.", tag: "Gestão" },
 ];
 
+/* ── PLANOS ── */
 const plans = [
   {
     name: "Starter",
     price: "R$ 297",
     period: "/mês",
-    desc: "CRM + Agente IA no WhatsApp. Ideal para clínicas que querem começar com atendimento automatizado.",
-    features: ["Agente IA no WhatsApp", "CRM de Pacientes", "Agendamento básico", "Suporte por chat"],
+    ideal: "Para começar com atendimento automatizado",
+    features: ["Agente IA no WhatsApp", "CRM de pacientes", "Agendamento inteligente", "Confirmações automáticas", "Suporte por chat"],
+    highlight: false,
     cta: "Começar agora",
-    highlight: false
   },
   {
     name: "Pro",
     price: "R$ 549",
     period: "/mês",
-    desc: "Gestão completa da clínica com IA em todos os processos. A solução mais escolhida.",
-    features: ["Tudo do Starter", "Prontuário eletrônico", "Gestão financeira completa", "Integração com maquininha", "Consultor IA personalizado", "Relatórios automáticos", "Suporte prioritário"],
-    cta: "Solicitar Demo",
-    highlight: true
+    ideal: "Gestão completa com IA em todos os processos",
+    features: ["Tudo do Starter", "Prontuário eletrônico", "Gestão financeira completa", "Integração maquininha", "Comissões médicas", "Consultor IA pessoal", "Dashboards em tempo real", "Suporte prioritário"],
+    highlight: true,
+    cta: "Solicitar demonstração",
   },
   {
     name: "Enterprise",
     price: "Sob consulta",
     period: "",
-    desc: "Para clínicas de médio e grande porte com múltiplos usuários e personalizações avançadas.",
-    features: ["Tudo do Pro", "Múltiplos usuários", "Customizações sob medida", "Integrações dedicadas", "SLA garantido", "Gerente de conta dedicado"],
+    ideal: "Clínicas de médio/grande porte",
+    features: ["Tudo do Pro", "Múltiplos usuários", "Customizações dedicadas", "SLA garantido", "Gerente de conta"],
+    highlight: false,
     cta: "Falar com consultor",
-    highlight: false
-  }
+  },
 ];
 
 export default function Home() {
   return (
     <MainLayout>
+
       {/* ── HERO ── */}
-      <section className="relative min-h-[95vh] flex items-center overflow-hidden">
-        {/* Background layers */}
-        <div className="absolute inset-0 bg-grid" />
-        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 80% 60% at 50% -10%, rgba(20,122,120,0.18) 0%, transparent 70%)" }} />
-        <div className="absolute bottom-0 left-0 right-0 h-40" style={{ background: "linear-gradient(to top, #070D0D, transparent)" }} />
+      <section className="relative overflow-hidden" style={{ background: "#FFFFFF", paddingTop: "6rem", paddingBottom: "6rem" }}>
+        <div className="absolute inset-0 bg-dots opacity-60" />
+        <div className="absolute top-0 right-0 w-1/2 h-full" style={{ background: "linear-gradient(to left, rgba(27,122,120,0.06), transparent)" }} />
 
-        {/* Floating orb */}
-        <div
-          className="absolute right-[8%] top-[18%] w-[520px] h-[520px] rounded-full pointer-events-none animate-float"
-          style={{
-            background: "radial-gradient(circle, rgba(29,168,154,0.12) 0%, rgba(10,74,74,0.06) 50%, transparent 70%)",
-            filter: "blur(40px)"
-          }}
-        />
+        <div className="container relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            {/* Left */}
+            <div>
+              <div className="athena-badge mb-6">
+                <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#1B7A78", display: "inline-block", animation: "pulse 2s infinite" }} />
+                Athena Clinic SO — Sistema Operacional para Clínicas
+              </div>
 
-        <div className="container relative z-10 pt-16 pb-24">
-          <div className="max-w-4xl">
-            {/* Badge */}
-            <div className="athena-badge mb-8 animate-fade-up">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#1DA89A] animate-pulse" />
-              Inteligência Artificial Aplicada a Processos e Gestão
-            </div>
-
-            {/* Headline */}
-            <h1
-              className="animate-fade-up delay-100 mb-6"
-              style={{
+              <h1 style={{
                 fontFamily: "'Sora', sans-serif",
                 fontWeight: 800,
-                fontSize: "clamp(2.5rem, 6vw, 5rem)",
+                fontSize: "clamp(2.25rem, 5vw, 4rem)",
                 lineHeight: 1.08,
                 letterSpacing: "-0.04em",
-                color: "#F2EDE8"
-              }}
-            >
-              Automação com IA<br />
-              que{" "}
-              <span className="text-gradient-teal">transforma operações</span>{" "}
-              em<br />vantagem competitiva.
-            </h1>
+                color: "#0D5252",
+                marginBottom: "1.5rem",
+              }}>
+                Você se formou para<br />
+                curar pessoas.<br />
+                <span className="text-gradient-light">Não para gerenciar caos.</span>
+              </h1>
 
-            <p
-              className="animate-fade-up delay-200 mb-10 max-w-2xl"
-              style={{
-                fontFamily: "'DM Sans', sans-serif",
-                fontSize: "1.125rem",
-                lineHeight: 1.7,
-                color: "#7a9a9a"
-              }}
-            >
-              A Prattica AI integra agentes de IA, automação de processos e consultoria estratégica para eliminar ineficiências, reduzir custos e dar ao seu time tempo para o que realmente importa.
-            </p>
+              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1.125rem", color: "#4A6868", lineHeight: 1.7, maxWidth: "520px", marginBottom: "2.5rem" }}>
+                O Athena Clinic SO automatiza o atendimento, a agenda, o financeiro e a gestão da sua clínica — com agentes de IA que trabalham enquanto você faz o que realmente importa.
+              </p>
 
-            <div className="flex flex-wrap gap-4 animate-fade-up delay-300">
-              <Link href="/contato">
-                <a className="btn-primary">
-                  Agendar diagnóstico gratuito <ArrowRight className="w-4 h-4" />
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 14, marginBottom: "2.5rem" }}>
+                <Link href="/contato">
+                  <a className="btn-primary" style={{ fontSize: "1rem", padding: "1rem 2rem" }}>
+                    Agendar diagnóstico grátis <ArrowRight className="w-5 h-5" />
+                  </a>
+                </Link>
+                <a href={WPP_URL} target="_blank" rel="noopener noreferrer" className="btn-ghost" style={{ fontSize: "1rem", padding: "1rem 2rem" }}>
+                  Falar no WhatsApp
                 </a>
-              </Link>
-              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-ghost">
-                Falar no WhatsApp
-              </a>
+              </div>
+
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "1.25rem" }}>
+                {["MVP validado em clínicas reais", "Sem fidelidade", "LGPD compliant"].map((item, i) => (
+                  <div key={i} style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    <CheckCircle2 style={{ width: 16, height: 16, color: "#1B7A78", flexShrink: 0 }} />
+                    <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.8125rem", color: "#7A9898" }}>{item}</span>
+                  </div>
+                ))}
+              </div>
             </div>
 
-            {/* Trust indicators */}
-            <div className="flex flex-wrap gap-6 mt-12 animate-fade-up delay-400">
-              {[
-                "MVP validado em clínicas reais",
-                "Agentes IA 24/7",
-                "Campo Grande, MS"
-              ].map((item, i) => (
-                <div key={i} className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 shrink-0" style={{ color: "#1DA89A" }} />
-                  <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.8125rem", color: "#6a8a8a" }}>{item}</span>
+            {/* Right — Dashboard mockup */}
+            <div className="relative" style={{ display: "none" }}>
+              {/* Shown only lg+ via CSS below */}
+            </div>
+            <div className="hidden lg:block relative">
+              <div className="animate-float">
+                {/* Dashboard window */}
+                <div style={{ background: "#FFFFFF", border: "1px solid rgba(27,122,120,0.15)", borderRadius: 20, boxShadow: "0 24px 80px rgba(13,82,82,0.12)", overflow: "hidden" }}>
+                  {/* Window bar */}
+                  <div style={{ background: "#F7F7F8", padding: "12px 20px", borderBottom: "1px solid rgba(27,122,120,0.08)", display: "flex", alignItems: "center", gap: 8 }}>
+                    {["#1B7A78", "#5BB5B0", "#d1d5db"].map((c, i) => <div key={i} style={{ width: 10, height: 10, borderRadius: "50%", background: c }} />)}
+                    <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.625rem", color: "#7A9898", marginLeft: 10 }}>Athena Clinic SO — Dashboard</span>
+                  </div>
+
+                  <div style={{ padding: 24, display: "flex", flexDirection: "column", gap: 16 }}>
+                    {/* KPIs */}
+                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10 }}>
+                      {[
+                        { label: "Faturamento", value: "R$48.2k", trend: "↑ +12%" },
+                        { label: "Agendamentos", value: "183", trend: "↑ +8%" },
+                        { label: "Satisfação", value: "4.9/5", trend: "★★★★★" },
+                      ].map((kpi, i) => (
+                        <div key={i} style={{ background: "#F7F7F8", border: "1px solid rgba(27,122,120,0.08)", borderRadius: 10, padding: "12px" }}>
+                          <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.5625rem", color: "#7A9898", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 5 }}>{kpi.label}</div>
+                          <div style={{ fontFamily: "'Sora', sans-serif", fontWeight: 700, fontSize: "1rem", color: "#0D5252", marginBottom: 3 }}>{kpi.value}</div>
+                          <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.5625rem", color: "#1B7A78" }}>{kpi.trend}</div>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* AI Chat */}
+                    <div style={{ background: "#F7F7F8", border: "1px solid rgba(27,122,120,0.08)", borderRadius: 10, padding: 16 }}>
+                      <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.5625rem", color: "#1B7A78", marginBottom: 10, display: "flex", alignItems: "center", gap: 5 }}>
+                        <div style={{ width: 5, height: 5, borderRadius: "50%", background: "#1B7A78", animation: "pulse 2s infinite" }} />
+                        ATHENA IA — Consultor Pessoal
+                      </div>
+                      <div style={{ background: "rgba(27,122,120,0.06)", borderRadius: 8, padding: "10px 12px", fontFamily: "'DM Sans', sans-serif", fontSize: "0.75rem", color: "#4A6868", lineHeight: 1.5, marginBottom: 8 }}>
+                        Seu faturamento cresceu 12% este mês. 24 pacientes aguardam na lista de espera para sextas. Recomendo ativar encaixes.
+                      </div>
+                      <div style={{ alignSelf: "flex-end", background: "#EEEEF0", borderRadius: 8, padding: "8px 12px", fontFamily: "'DM Sans', sans-serif", fontSize: "0.75rem", color: "#7A9898", textAlign: "right" }}>
+                        Gere o relatório de comissões de outubro
+                      </div>
+                    </div>
+
+                    {/* Status */}
+                    <div style={{ display: "flex", justifyContent: "space-between" }}>
+                      <div style={{ display: "flex", alignItems: "center", gap: 5, fontFamily: "'DM Mono', monospace", fontSize: "0.5625rem", color: "#7A9898" }}>
+                        <div style={{ width: 5, height: 5, borderRadius: "50%", background: "#1B7A78", animation: "pulse 2s infinite" }} />
+                        Agente WhatsApp ativo
+                      </div>
+                      <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.5625rem", color: "#7A9898" }}>3 consultas atendidas agora</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── STATS ── */}
+      <section style={{ background: "#0D5252", padding: "3.5rem 0" }}>
+        <div className="container">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {[
+              { value: "+45%", label: "Eficiência operacional média" },
+              { value: "24/7", label: "Atendimento com agente IA" },
+              { value: "3x", label: "ROI médio em 12 meses" },
+              { value: "0", label: "Contatos perdidos no WhatsApp" },
+            ].map((s, i) => (
+              <div key={i} className="text-center">
+                <div style={{ fontFamily: "'Sora', sans-serif", fontWeight: 800, fontSize: "clamp(2rem, 4vw, 3rem)", color: "#5BB5B0", letterSpacing: "-0.04em", lineHeight: 1, marginBottom: 8 }}>{s.value}</div>
+                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.8125rem", color: "rgba(126,200,196,0.7)" }}>{s.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── PROBLEMA ── */}
+      <section style={{ background: "#EEEEF0", padding: "6rem 0" }}>
+        <div className="container">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+            <div>
+              <div className="athena-badge mb-6">O problema</div>
+              <h2 style={{ fontFamily: "'Sora', sans-serif", fontWeight: 700, fontSize: "clamp(1.875rem, 4vw, 3rem)", color: "#0D5252", letterSpacing: "-0.035em", lineHeight: 1.15, marginBottom: "1.25rem" }}>
+                Sua clínica perde dinheiro<br />
+                <span className="text-gradient-teal">todo dia sem perceber.</span>
+              </h2>
+              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1.0625rem", color: "#4A6868", lineHeight: 1.65, marginBottom: "2.5rem" }}>
+                Não falta dedicação nem talento médico. Falta um sistema que faça a gestão trabalhar por você.
+              </p>
+              <Link href="/produtos">
+                <a className="btn-primary">Ver como o Athena resolve <ArrowRight className="w-4 h-4" /></a>
+              </Link>
+            </div>
+
+            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+              {pains.map((pain, i) => (
+                <div key={i} className="card-surface" style={{ padding: "18px 20px", display: "flex", alignItems: "flex-start", gap: 16 }}>
+                  <span style={{ fontSize: "1.375rem", flexShrink: 0, marginTop: 2 }}>{pain.icon}</span>
+                  <div>
+                    <div style={{ fontFamily: "'Sora', sans-serif", fontWeight: 600, fontSize: "0.9375rem", color: "#0D5252", marginBottom: 4 }}>{pain.title}</div>
+                    <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.875rem", color: "#4A6868", lineHeight: 1.55 }}>{pain.desc}</div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -167,227 +246,92 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── STATS ── */}
-      <section style={{ background: "#0F1E1E", borderTop: "1px solid rgba(94,196,188,0.08)", borderBottom: "1px solid rgba(94,196,188,0.08)" }} className="py-14">
+      {/* ── ATHENA — PRODUTO ── */}
+      <section style={{ background: "#FFFFFF", padding: "6rem 0", borderTop: "1px solid rgba(27,122,120,0.08)" }}>
         <div className="container">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {[
-              { value: "+45%", label: "Eficiência operacional média" },
-              { value: "24/7", label: "Atendimento com agentes IA" },
-              { value: "3x", label: "ROI em 12 meses" },
-              { value: "100%", label: "Processos rastreados" },
-            ].map((stat, i) => (
-              <div key={i} className="text-center">
-                <div
-                  style={{
-                    fontFamily: "'Sora', sans-serif",
-                    fontWeight: 800,
-                    fontSize: "clamp(1.875rem, 4vw, 3rem)",
-                    color: "#1DA89A",
-                    letterSpacing: "-0.04em",
-                    lineHeight: 1
-                  }}
-                  className="mb-2"
-                >
-                  {stat.value}
+          <div className="text-center" style={{ marginBottom: "4rem" }}>
+            <div style={{ marginBottom: "1.5rem", display: "flex", justifyContent: "center" }}>
+              <AthenaLogo variant="full" size="lg" theme="light" />
+            </div>
+            <h2 style={{ fontFamily: "'Sora', sans-serif", fontWeight: 700, fontSize: "clamp(1.875rem, 4vw, 3rem)", color: "#0D5252", letterSpacing: "-0.035em", lineHeight: 1.15, marginBottom: "1rem" }}>
+              Tudo que sua clínica precisa,<br />
+              <span className="text-gradient-light">em um único sistema com IA.</span>
+            </h2>
+            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1.0625rem", color: "#4A6868", maxWidth: 560, margin: "0 auto", lineHeight: 1.65 }}>
+              Do WhatsApp ao relatório financeiro — 8 módulos integrados que eliminam planilhas, papéis e sistemas desconectados.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {features.map((feat, i) => (
+              <div key={i} className="card-surface group" style={{ padding: "28px 24px", cursor: "default" }}>
+                <div style={{ width: 44, height: 44, borderRadius: 12, background: "rgba(27,122,120,0.08)", border: "1px solid rgba(27,122,120,0.15)", display: "flex", alignItems: "center", justifyContent: "center", color: "#1B7A78", marginBottom: 18, transition: "transform 0.3s" }} className="group-hover:scale-110">
+                  {feat.icon}
                 </div>
-                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.8125rem", color: "#5a7a7a" }}>{stat.label}</p>
+                <div className="athena-badge" style={{ fontSize: "0.6rem", marginBottom: 10 }}>{feat.tag}</div>
+                <h3 style={{ fontFamily: "'Sora', sans-serif", fontWeight: 700, fontSize: "1rem", color: "#0D5252", marginBottom: "0.5rem" }}>{feat.title}</h3>
+                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.875rem", color: "#4A6868", lineHeight: 1.65 }}>{feat.desc}</p>
               </div>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* ── SOLUÇÕES ── */}
-      <section className="py-28">
-        <div className="container">
-          <div className="mb-16">
-            <div className="athena-badge mb-6">Nossas Soluções</div>
-            <div className="flex flex-col md:flex-row justify-between items-end gap-6">
-              <h2 style={{ fontFamily: "'Sora', sans-serif", fontWeight: 700, fontSize: "clamp(1.875rem, 4vw, 3rem)", color: "#F2EDE8", letterSpacing: "-0.03em", lineHeight: 1.15, maxWidth: "480px" }}>
-                Do diagnóstico à operação{" "}
-                <span className="text-gradient-teal">totalmente automatizada.</span>
-              </h2>
-              <Link href="/solucoes">
-                <a className="flex items-center gap-2 text-sm font-medium transition-colors duration-200" style={{ color: "#5EC4BC", fontFamily: "'DM Sans', sans-serif", whiteSpace: "nowrap" }}>
-                  Ver todas as soluções <ChevronRight className="w-4 h-4" />
-                </a>
-              </Link>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {solutionCards.map((card, i) => (
-              <div
-                key={i}
-                className="card-surface p-8 group cursor-default"
-              >
-                <div
-                  className="w-12 h-12 rounded-xl flex items-center justify-center mb-6 transition-all duration-300 group-hover:scale-110"
-                  style={{ background: "rgba(29,168,154,0.08)", border: "1px solid rgba(29,168,154,0.15)" }}
-                >
-                  {card.icon}
-                </div>
-                <div className="athena-badge mb-4" style={{ fontSize: "0.625rem" }}>{card.tag}</div>
-                <h3 style={{ fontFamily: "'Sora', sans-serif", fontWeight: 700, fontSize: "1.25rem", color: "#F2EDE8", marginBottom: "0.75rem" }}>{card.title}</h3>
-                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.9375rem", color: "#6a8a8a", lineHeight: 1.65 }}>{card.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── ATHENA CLINIC SO — PRODUTO DESTAQUE ── */}
-      <section style={{ background: "#0A1818" }} className="py-28 relative overflow-hidden">
-        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 60% 80% at 90% 50%, rgba(20,122,120,0.10) 0%, transparent 60%)" }} />
-        <div className="container relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            {/* Left: copy */}
-            <div>
-              <div className="athena-badge mb-6">
-                <AthenaLogo size={14} />
-                Produto Principal
-              </div>
-              <h2 style={{ fontFamily: "'Sora', sans-serif", fontWeight: 800, fontSize: "clamp(2rem, 4vw, 3.25rem)", color: "#F2EDE8", letterSpacing: "-0.04em", lineHeight: 1.1, marginBottom: "1.25rem" }}>
-                Athena Clinic SO
-              </h2>
-              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1.125rem", color: "#7a9a9a", lineHeight: 1.65, marginBottom: "2rem" }}>
-                O sistema operacional completo para clínicas médicas particulares. Desde o primeiro contato no WhatsApp até o relatório financeiro do mês — tudo automatizado com IA.
-              </p>
-
-              <ul className="space-y-4 mb-10">
-                {athenaFeatures.map((feat, i) => (
-                  <li key={i} className="flex items-start gap-4">
-                    <div className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 mt-0.5" style={{ background: "rgba(29,168,154,0.08)", border: "1px solid rgba(29,168,154,0.15)", color: "#1DA89A" }}>
-                      {feat.icon}
-                    </div>
-                    <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.9375rem", color: "#a0b8b8", lineHeight: 1.5 }}>{feat.text}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <div className="flex flex-wrap gap-4">
-                <Link href="/produtos">
-                  <a className="btn-primary">
-                    Ver o Athena Clinic <ArrowRight className="w-4 h-4" />
-                  </a>
-                </Link>
-                <Link href="/contato">
-                  <a className="btn-ghost">Solicitar demo</a>
-                </Link>
-              </div>
-            </div>
-
-            {/* Right: visual mockup */}
-            <div className="relative">
-              {/* Glow */}
-              <div className="absolute inset-0 rounded-3xl" style={{ background: "radial-gradient(circle at 50% 50%, rgba(29,168,154,0.15) 0%, transparent 70%)", filter: "blur(40px)" }} />
-              <div
-                className="relative rounded-2xl overflow-hidden"
-                style={{ background: "#0F1E1E", border: "1px solid rgba(94,196,188,0.15)", padding: "2px" }}
-              >
-                {/* Fake window bar */}
-                <div style={{ background: "#0A1515", padding: "12px 20px", borderBottom: "1px solid rgba(94,196,188,0.08)", display: "flex", alignItems: "center", gap: "8px" }}>
-                  {["#1DA89A", "#5EC4BC", "#2a4040"].map((c, i) => <div key={i} style={{ width: 10, height: 10, borderRadius: "50%", background: c }} />)}
-                  <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.6875rem", color: "#3a6060", marginLeft: "12px" }}>Athena Clinic SO — Dashboard</span>
-                </div>
-
-                <div style={{ padding: "24px", display: "flex", flexDirection: "column", gap: "16px" }}>
-                  {/* KPI row */}
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "12px" }}>
-                    {[
-                      { label: "Faturamento", value: "R$ 48.200", trend: "+12%" },
-                      { label: "Agendamentos", value: "183", trend: "+8%" },
-                      { label: "Satisfação", value: "4.9 / 5", trend: "★★★★★" },
-                    ].map((kpi, i) => (
-                      <div key={i} style={{ background: "#0A1515", border: "1px solid rgba(94,196,188,0.08)", borderRadius: "10px", padding: "12px" }}>
-                        <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.625rem", color: "#3a6060", marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.08em" }}>{kpi.label}</div>
-                        <div style={{ fontFamily: "'Sora', sans-serif", fontWeight: 700, fontSize: "1rem", color: "#F2EDE8", marginBottom: "4px" }}>{kpi.value}</div>
-                        <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.6875rem", color: "#1DA89A" }}>{kpi.trend}</div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Chat IA */}
-                  <div style={{ background: "#0A1515", border: "1px solid rgba(94,196,188,0.08)", borderRadius: "10px", padding: "16px" }}>
-                    <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.625rem", color: "#1DA89A", marginBottom: "12px" }}>◈ ATHENA IA — Consultor Pessoal</div>
-                    <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-                      <div style={{ background: "rgba(29,168,154,0.08)", borderRadius: "8px", padding: "10px 12px", fontFamily: "'DM Sans', sans-serif", fontSize: "0.8125rem", color: "#a0b8b8" }}>
-                        Seu faturamento cresceu 12% em relação ao mês anterior. Recomendo ativar a lista de espera para sextas-feiras — 24 pacientes aguardam.
-                      </div>
-                      <div style={{ alignSelf: "flex-end", background: "rgba(94,196,188,0.06)", border: "1px solid rgba(94,196,188,0.12)", borderRadius: "8px", padding: "8px 12px", fontFamily: "'DM Sans', sans-serif", fontSize: "0.8125rem", color: "#6a8a8a" }}>
-                        Mostre o relatório de comissões de outubro
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Bottom status */}
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                    <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-                      <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#1DA89A" }} className="animate-pulse" />
-                      <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.625rem", color: "#3a6060" }}>Agente WhatsApp ativo</span>
-                    </div>
-                    <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.625rem", color: "#3a6060" }}>3 consultas atendidas agora</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div className="text-center" style={{ marginTop: "3rem" }}>
+            <Link href="/produtos">
+              <a style={{ display: "inline-flex", alignItems: "center", gap: 8, fontFamily: "'DM Sans', sans-serif", fontSize: "0.9375rem", fontWeight: 500, color: "#1B7A78", textDecoration: "none" }}>
+                Ver todos os módulos <ChevronRight className="w-4 h-4" />
+              </a>
+            </Link>
           </div>
         </div>
       </section>
 
       {/* ── PLANOS ── */}
-      <section className="py-28">
+      <section style={{ background: "#EEEEF0", padding: "6rem 0" }}>
         <div className="container">
-          <div className="text-center mb-16">
-            <div className="athena-badge mb-6 justify-center">Planos Athena Clinic SO</div>
-            <h2 style={{ fontFamily: "'Sora', sans-serif", fontWeight: 700, fontSize: "clamp(1.875rem, 4vw, 3rem)", color: "#F2EDE8", letterSpacing: "-0.03em", marginBottom: "1rem" }}>
-              Escolha o plano certo<br />para sua clínica
+          <div className="text-center" style={{ marginBottom: "3.5rem" }}>
+            <div className="athena-badge" style={{ marginBottom: "1.25rem" }}>Planos e Preços</div>
+            <h2 style={{ fontFamily: "'Sora', sans-serif", fontWeight: 700, fontSize: "clamp(1.875rem, 4vw, 3rem)", color: "#0D5252", letterSpacing: "-0.035em", marginBottom: "1rem" }}>
+              Transparência total. Sem surpresas.
             </h2>
-            <p style={{ fontFamily: "'DM Sans', sans-serif", color: "#6a8a8a", maxWidth: "500px", margin: "0 auto", lineHeight: 1.6 }}>
-              Todos os planos incluem suporte, atualizações automáticas e agente IA. Sem fidelidade.
+            <p style={{ fontFamily: "'DM Sans', sans-serif", color: "#4A6868", maxWidth: 480, margin: "0 auto", lineHeight: 1.6 }}>
+              Mensalidade sem fidelidade. Upgrade ou cancelamento a qualquer momento.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {plans.map((plan, i) => (
-              <div
-                key={i}
-                className="relative rounded-2xl p-8 flex flex-col"
-                style={{
-                  background: plan.highlight ? "rgba(20,122,120,0.12)" : "#0F1E1E",
-                  border: plan.highlight ? "1px solid rgba(29,168,154,0.4)" : "1px solid rgba(94,196,188,0.10)",
-                  boxShadow: plan.highlight ? "0 0 60px rgba(29,168,154,0.12)" : "none"
-                }}
-              >
+              <div key={i} className="relative rounded-2xl p-8 flex flex-col" style={{
+                background: plan.highlight ? "#1B7A78" : "#FFFFFF",
+                border: plan.highlight ? "none" : "1px solid rgba(27,122,120,0.12)",
+                boxShadow: plan.highlight ? "0 24px 60px rgba(13,82,82,0.20)" : "none",
+              }}>
                 {plan.highlight && (
                   <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-                    <span className="athena-badge" style={{ background: "#147A78", color: "#F2EDE8", borderColor: "#1DA89A", fontSize: "0.6rem" }}>
+                    <span style={{ background: "#0D5252", color: "#EEEEF0", fontFamily: "'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.10em", textTransform: "uppercase", padding: "4px 16px", borderRadius: 999, display: "block", whiteSpace: "nowrap" }}>
                       Mais escolhido
                     </span>
                   </div>
                 )}
 
-                <div className="mb-6">
-                  <h3 style={{ fontFamily: "'Sora', sans-serif", fontWeight: 700, fontSize: "1.25rem", color: "#F2EDE8", marginBottom: "0.5rem" }}>{plan.name}</h3>
-                  <div className="flex items-baseline gap-1 mb-3">
-                    <span style={{ fontFamily: "'Sora', sans-serif", fontWeight: 800, fontSize: plan.period ? "2.25rem" : "1.5rem", color: plan.highlight ? "#1DA89A" : "#F2EDE8", letterSpacing: "-0.04em" }}>{plan.price}</span>
-                    {plan.period && <span style={{ color: "#6a8a8a", fontFamily: "'DM Sans', sans-serif", fontSize: "0.875rem" }}>{plan.period}</span>}
-                  </div>
-                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.875rem", color: "#6a8a8a", lineHeight: 1.55 }}>{plan.desc}</p>
+                <h3 style={{ fontFamily: "'Sora', sans-serif", fontWeight: 700, fontSize: "1.25rem", color: plan.highlight ? "#EEEEF0" : "#0D5252", marginBottom: 4 }}>{plan.name}</h3>
+                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.8125rem", color: plan.highlight ? "rgba(238,238,240,0.7)" : "#7A9898", marginBottom: "1.25rem", lineHeight: 1.4 }}>{plan.ideal}</p>
+
+                <div style={{ display: "flex", alignItems: "baseline", gap: 4, marginBottom: "1.5rem" }}>
+                  <span style={{ fontFamily: "'Sora', sans-serif", fontWeight: 800, fontSize: plan.period ? "2.5rem" : "1.375rem", color: plan.highlight ? "#EEEEF0" : "#0D5252", letterSpacing: "-0.04em" }}>{plan.price}</span>
+                  {plan.period && <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.875rem", color: plan.highlight ? "rgba(238,238,240,0.6)" : "#7A9898" }}>{plan.period}</span>}
                 </div>
 
-                <ul className="space-y-3 mb-8 flex-1">
+                <ul style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: "2rem", flex: 1 }}>
                   {plan.features.map((feat, j) => (
-                    <li key={j} className="flex items-start gap-3">
-                      <CheckCircle2 className="w-4 h-4 shrink-0 mt-0.5" style={{ color: "#1DA89A" }} />
-                      <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.875rem", color: "#9ab4b4" }}>{feat}</span>
+                    <li key={j} style={{ display: "flex", alignItems: "flex-start", gap: 10 }}>
+                      <CheckCircle2 style={{ width: 16, height: 16, flexShrink: 0, marginTop: 2, color: plan.highlight ? "#7EC8C4" : "#1B7A78" }} />
+                      <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.875rem", color: plan.highlight ? "rgba(238,238,240,0.85)" : "#4A6868" }}>{feat}</span>
                     </li>
                   ))}
                 </ul>
 
                 <Link href="/contato">
-                  <a className={plan.highlight ? "btn-primary justify-center text-center" : "btn-ghost justify-center text-center"} style={{ width: "100%" }}>
+                  <a className={plan.highlight ? "btn-white" : "btn-ghost"} style={{ width: "100%", justifyContent: "center" }}>
                     {plan.cta}
                   </a>
                 </Link>
@@ -398,36 +342,35 @@ export default function Home() {
       </section>
 
       {/* ── CTA FINAL ── */}
-      <section
-        className="py-28 relative overflow-hidden"
-        style={{ background: "#0A1818" }}
-      >
-        <div className="absolute inset-0 bg-grid opacity-50" />
-        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 60% 80% at 50% 50%, rgba(20,122,120,0.12) 0%, transparent 70%)" }} />
-
+      <section className="section-teal" style={{ padding: "6rem 0", position: "relative", overflow: "hidden" }}>
+        <div className="absolute inset-0 bg-grid opacity-20" />
         <div className="container relative z-10 text-center">
           <div className="max-w-3xl mx-auto">
-            <div className="athena-badge mb-8 justify-center">Próximo passo</div>
-            <h2 style={{ fontFamily: "'Sora', sans-serif", fontWeight: 800, fontSize: "clamp(2rem, 5vw, 3.75rem)", color: "#F2EDE8", letterSpacing: "-0.04em", lineHeight: 1.1, marginBottom: "1.5rem" }}>
-              Pronto para automatizar sua operação com{" "}
-              <span className="text-gradient-teal">inteligência real?</span>
+            <div className="athena-badge athena-badge-dark mb-8" style={{ justifyContent: "center" }}>Próximo passo</div>
+            <h2 style={{ fontFamily: "'Sora', sans-serif", fontWeight: 800, fontSize: "clamp(2rem, 5vw, 3.5rem)", color: "#EEEEF0", letterSpacing: "-0.04em", lineHeight: 1.1, marginBottom: "1.5rem" }}>
+              Sua clínica trabalhando<br />
+              enquanto você descansa.
             </h2>
-            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1.125rem", color: "#6a8a8a", marginBottom: "2.5rem", lineHeight: 1.65 }}>
-              Agende um diagnóstico gratuito de 30 minutos. Identificamos em quais processos a IA pode gerar mais resultado para o seu negócio.
+            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1.125rem", color: "rgba(238,238,240,0.75)", marginBottom: "2.5rem", lineHeight: 1.65 }}>
+              Agende um diagnóstico gratuito de 30 minutos. Mostramos ao vivo onde a IA pode reduzir custos e aumentar o faturamento da sua clínica.
             </p>
-            <div className="flex flex-wrap gap-4 justify-center">
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 14, justifyContent: "center" }}>
               <Link href="/contato">
-                <a className="btn-primary" style={{ fontSize: "1rem", padding: "1rem 2.5rem" }}>
+                <a className="btn-white" style={{ fontSize: "1rem", padding: "1rem 2.5rem" }}>
                   Agendar diagnóstico gratuito <ArrowRight className="w-5 h-5" />
                 </a>
               </Link>
-              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-ghost" style={{ fontSize: "1rem", padding: "1rem 2.5rem" }}>
+              <a href={WPP_URL} target="_blank" rel="noopener noreferrer"
+                style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "1rem 2.5rem", background: "rgba(255,255,255,0.12)", color: "#EEEEF0", fontFamily: "'Sora', sans-serif", fontWeight: 600, fontSize: "1rem", borderRadius: 10, border: "1.5px solid rgba(255,255,255,0.25)", transition: "all 0.25s", textDecoration: "none" }}
+                onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,255,255,0.20)")}
+                onMouseLeave={e => (e.currentTarget.style.background = "rgba(255,255,255,0.12)")}>
                 Falar agora no WhatsApp
               </a>
             </div>
           </div>
         </div>
       </section>
+
     </MainLayout>
   );
 }
