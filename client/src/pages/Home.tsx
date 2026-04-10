@@ -1,190 +1,200 @@
 import { Link } from "wouter";
 import MainLayout from "@/components/MainLayout";
-import AthenaLogo from "@/components/AthenaLogo";
-import { ArrowRight, CheckCircle2, ChevronRight, MessageSquare, Calendar, DollarSign, Brain, BarChart3, Zap, Layers, Bot, X } from "lucide-react";
+import { ArrowRight, ChevronRight, BarChart3, Zap, Layers, TrendingUp, Shield, Clock } from "lucide-react";
 
-const WPP = "5567993013370";
-const WPP_MSG = encodeURIComponent("Olá! Quero conhecer o Athena Clinic SO.");
-const WPP_URL = `https://wa.me/${WPP}?text=${WPP_MSG}`;
+const WPP = "https://wa.me/5567993013370?text=" + encodeURIComponent("Olá! Quero conhecer as soluções da Prattica AI.");
 
-/* ── DORES — PROBLEMA ── */
-const pains = [
-  {
-    icon: "📱",
-    title: "Pacientes sem resposta no WhatsApp",
-    desc: "Sua recepção não dá conta. Cada mensagem ignorada é um paciente que agenda na concorrência."
-  },
-  {
-    icon: "📋",
-    title: "Agenda bagunçada e faltas sem aviso",
-    desc: "Horários vagos que deveriam estar gerando faturamento. Nenhum sistema de confirmação automática."
-  },
-  {
-    icon: "💸",
-    title: "Financeiro no Excel ou no papel",
-    desc: "Você não sabe hoje quanto entrou, quanto saiu nem qual a margem real da sua clínica."
-  },
-  {
-    icon: "👥",
-    title: "Mais funcionários para cobrir mais demanda",
-    desc: "Cada novo funcionário aumenta o custo fixo e diminui o lucro. O problema não é de gente — é de processo."
-  },
-  {
-    icon: "🔄",
-    title: "A clínica depende de você para tudo",
-    desc: "Você formou anos para ser médico. Hoje passa metade do dia resolvendo problema de gestão."
-  },
+const solucoes = [
+  { icon: <BarChart3 style={{ width: 22, height: 22 }} />, title: "Inteligência de Dados", desc: "Transformamos os dados da sua operação em indicadores precisos, padrões previsíveis e decisões fundamentadas." },
+  { icon: <Zap style={{ width: 22, height: 22 }} />, title: "Automação de Processos", desc: "Eliminamos tarefas manuais repetitivas com fluxos inteligentes que integram sistemas e liberam sua equipe." },
+  { icon: <Layers style={{ width: 22, height: 22 }} />, title: "Consultoria Estratégica", desc: "Mapeamos gargalos, desenhamos a estrutura certa e implementamos mudanças com foco em resultado mensurável." },
 ];
 
-/* ── FEATURES ── */
-const features = [
-  { icon: <MessageSquare className="w-5 h-5" />, title: "Agente IA no WhatsApp", desc: "Atende, agenda e responde 24h/dia. Zero contato perdido.", tag: "Atendimento" },
-  { icon: <Calendar className="w-5 h-5" />,       title: "Agendamento inteligente", desc: "Confirmação automática, lista de espera, zero falta.", tag: "Agenda" },
-  { icon: <Brain className="w-5 h-5" />,          title: "Consultor IA pessoal", desc: "Insights e relatórios sob demanda para o dono.", tag: "Inteligência" },
-  { icon: <DollarSign className="w-5 h-5" />,     title: "Gestão financeira", desc: "Caixa, comissões, integração com maquininha.", tag: "Financeiro" },
-  { icon: <BarChart3 className="w-5 h-5" />,      title: "Dashboards em tempo real", desc: "Saúde financeira da clínica sempre visível.", tag: "Analytics" },
-  { icon: <Bot className="w-5 h-5" />,            title: "CRM + Prontuário", desc: "Histórico completo, seguro, acessível.", tag: "Gestão" },
-];
-
-/* ── PLANOS ── */
-const plans = [
-  {
-    name: "Starter",
-    price: "R$ 297",
-    period: "/mês",
-    ideal: "Para começar com atendimento automatizado",
-    features: ["Agente IA no WhatsApp", "CRM de pacientes", "Agendamento inteligente", "Confirmações automáticas", "Suporte por chat"],
-    highlight: false,
-    cta: "Começar agora",
-  },
-  {
-    name: "Pro",
-    price: "R$ 549",
-    period: "/mês",
-    ideal: "Gestão completa com IA em todos os processos",
-    features: ["Tudo do Starter", "Prontuário eletrônico", "Gestão financeira completa", "Integração maquininha", "Comissões médicas", "Consultor IA pessoal", "Dashboards em tempo real", "Suporte prioritário"],
-    highlight: true,
-    cta: "Solicitar demonstração",
-  },
-  {
-    name: "Enterprise",
-    price: "Sob consulta",
-    period: "",
-    ideal: "Clínicas de médio/grande porte",
-    features: ["Tudo do Pro", "Múltiplos usuários", "Customizações dedicadas", "SLA garantido", "Gerente de conta"],
-    highlight: false,
-    cta: "Falar com consultor",
-  },
+const numeros = [
+  { v: "1,5 anos", l: "desenvolvendo soluções com IA nativa" },
+  { v: "3",        l: "produtos SaaS em desenvolvimento" },
+  { v: "24/7",     l: "operação autônoma para os clientes" },
+  { v: "ROI",      l: "mensurável desde o primeiro mês" },
 ];
 
 export default function Home() {
   return (
     <MainLayout>
 
-      {/* ── HERO ── */}
-      <section className="relative overflow-hidden" style={{ background: "#FFFFFF", paddingTop: "6rem", paddingBottom: "6rem" }}>
-        <div className="absolute inset-0 bg-dots opacity-60" />
-        <div className="absolute top-0 right-0 w-1/2 h-full" style={{ background: "linear-gradient(to left, rgba(27,122,120,0.06), transparent)" }} />
+      {/* HERO */}
+      <section style={{ position: "relative", minHeight: "100vh", display: "flex", alignItems: "center", overflow: "hidden", padding: "7rem 0 5rem" }}>
+        <div className="absolute inset-0 bg-grid" />
+        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 70% 60% at 50% -10%, rgba(27,122,120,0.18) 0%, transparent 65%)" }} />
+        <div className="absolute bottom-0 left-0 right-0" style={{ height: 120, background: "linear-gradient(to top, #0D1A1A, transparent)" }} />
 
-        <div className="container relative z-10">
+        <div className="container" style={{ position: "relative", zIndex: 2 }}>
+          <div style={{ maxWidth: 820 }}>
+            <div className="badge" style={{ marginBottom: "2rem", opacity: 0, animation: "fadeUp 0.6s ease 0.1s forwards" }}>
+              <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#5EC4BC", display: "inline-block", animation: "pulse 2s infinite" }} />
+              Prattica AI Solutions — Campo Grande, MS
+            </div>
+
+            <h1 style={{
+              fontFamily: "'Sora', sans-serif", fontWeight: 800,
+              fontSize: "clamp(2.5rem, 6vw, 5rem)", lineHeight: 1.06,
+              letterSpacing: "-0.045em", color: "#E8F0F0",
+              marginBottom: "1.75rem",
+              opacity: 0, animation: "fadeUp 0.6s ease 0.2s forwards"
+            }}>
+              Sua empresa já tem os dados.<br />
+              <span className="text-gradient">Nós entregamos o que<br />eles significam.</span>
+            </h1>
+
+            <p style={{
+              fontFamily: "'DM Sans', sans-serif", fontSize: "1.125rem",
+              color: "#7AACAC", lineHeight: 1.7, maxWidth: 620,
+              marginBottom: "2.5rem",
+              opacity: 0, animation: "fadeUp 0.6s ease 0.3s forwards"
+            }}>
+              A Prattica AI desenvolve sistemas de gestão com IA nativa — construída dentro do seu negócio, não conectada por fora. Mais controle, mais previsibilidade, mais resultado.
+            </p>
+
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 14, opacity: 0, animation: "fadeUp 0.6s ease 0.4s forwards" }}>
+              <Link href="/solucoes"><a className="btn-primary" style={{ fontSize: "1rem", padding: "0.9rem 2rem" }}>Conhecer nossas soluções <ArrowRight style={{ width: 16, height: 16 }} /></a></Link>
+              <a href={WPP} target="_blank" rel="noopener noreferrer" className="btn-ghost" style={{ fontSize: "1rem", padding: "0.9rem 2rem" }}>Falar com especialista</a>
+            </div>
+          </div>
+        </div>
+
+        {/* Floating geometric decoration */}
+        <div className="animate-float" style={{
+          position: "absolute", right: "6%", top: "20%",
+          width: 380, height: 380, borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(27,122,120,0.10) 0%, transparent 70%)",
+          filter: "blur(40px)", pointerEvents: "none",
+        }} />
+        <div className="animate-spin-slow" style={{
+          position: "absolute", right: "12%", top: "25%",
+          width: 220, height: 220,
+          border: "1px solid rgba(94,196,188,0.08)",
+          borderRadius: "50%", pointerEvents: "none",
+        }} />
+      </section>
+
+      {/* NÚMEROS */}
+      <section style={{ background: "#080E0E", borderTop: "1px solid rgba(94,196,188,0.08)", borderBottom: "1px solid rgba(94,196,188,0.08)", padding: "3.5rem 0" }}>
+        <div className="container">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {numeros.map((n, i) => (
+              <div key={i} style={{ textAlign: "center" }}>
+                <div style={{ fontFamily: "'Sora', sans-serif", fontWeight: 800, fontSize: "clamp(1.75rem, 3.5vw, 2.75rem)", color: "#5EC4BC", letterSpacing: "-0.04em", lineHeight: 1, marginBottom: 8 }}>{n.v}</div>
+                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.8125rem", color: "#3A6868", lineHeight: 1.45 }}>{n.l}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* SOLUÇÕES */}
+      <section style={{ padding: "6rem 0" }}>
+        <div className="container">
+          <div style={{ display: "flex", flexDirection: "column", gap: "1rem", marginBottom: "3.5rem" }}>
+            <div className="badge">O que fazemos</div>
+            <h2 style={{ fontFamily: "'Sora', sans-serif", fontWeight: 700, fontSize: "clamp(1.875rem, 4vw, 3rem)", color: "#E8F0F0", letterSpacing: "-0.035em", lineHeight: 1.15, maxWidth: 580 }}>
+              Inteligência aplicada.<br /><span className="text-gradient">Resultado mensurável.</span>
+            </h2>
+            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1.0625rem", color: "#7AACAC", maxWidth: 520, lineHeight: 1.65 }}>
+              Combinamos consultoria estratégica, automação de processos e produtos SaaS verticalizados para transformar operações em vantagem competitiva.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {solucoes.map((s, i) => (
+              <div key={i} className="card-surface group" style={{ padding: "2rem", cursor: "default" }}>
+                <div style={{ width: 48, height: 48, borderRadius: 12, background: "rgba(94,196,188,0.08)", border: "1px solid rgba(94,196,188,0.12)", display: "flex", alignItems: "center", justifyContent: "center", color: "#5EC4BC", marginBottom: "1.25rem", transition: "transform 0.3s" }} className="group-hover:scale-110">
+                  {s.icon}
+                </div>
+                <h3 style={{ fontFamily: "'Sora', sans-serif", fontWeight: 700, fontSize: "1.125rem", color: "#E8F0F0", marginBottom: "0.625rem" }}>{s.title}</h3>
+                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.9375rem", color: "#7AACAC", lineHeight: 1.65 }}>{s.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <div style={{ textAlign: "center", marginTop: "2.5rem" }}>
+            <Link href="/solucoes"><a style={{ display: "inline-flex", alignItems: "center", gap: 6, fontFamily: "'DM Sans', sans-serif", fontSize: "0.9375rem", fontWeight: 500, color: "#5EC4BC", textDecoration: "none" }}>
+              Ver todas as soluções <ChevronRight style={{ width: 16, height: 16 }} />
+            </a></Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ATHENA — PRODUTO DESTAQUE */}
+      <section style={{ background: "#080E0E", borderTop: "1px solid rgba(94,196,188,0.08)", padding: "6rem 0", position: "relative", overflow: "hidden" }}>
+        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 50% 80% at 90% 50%, rgba(27,122,120,0.08) 0%, transparent 60%)" }} />
+        <div className="container" style={{ position: "relative", zIndex: 2 }}>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            {/* Left */}
             <div>
-              <div className="athena-badge mb-6">
-                <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#1B7A78", display: "inline-block", animation: "pulse 2s infinite" }} />
-                Athena Clinic SO — Sistema Operacional para Clínicas
-              </div>
-
-              <h1 style={{
-                fontFamily: "'Sora', sans-serif",
-                fontWeight: 800,
-                fontSize: "clamp(2.25rem, 5vw, 4rem)",
-                lineHeight: 1.08,
-                letterSpacing: "-0.04em",
-                color: "#0D5252",
-                marginBottom: "1.5rem",
-              }}>
-                Você se formou para<br />
-                curar pessoas.<br />
-                <span className="text-gradient-light">Não para gerenciar caos.</span>
-              </h1>
-
-              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1.125rem", color: "#4A6868", lineHeight: 1.7, maxWidth: "520px", marginBottom: "2.5rem" }}>
-                O Athena Clinic SO automatiza o atendimento, a agenda, o financeiro e a gestão da sua clínica — com agentes de IA que trabalham enquanto você faz o que realmente importa.
+              <div className="badge" style={{ marginBottom: "1.5rem" }}>Produto principal</div>
+              <h2 style={{ fontFamily: "'Sora', sans-serif", fontWeight: 800, fontSize: "clamp(2rem, 4vw, 3.25rem)", color: "#E8F0F0", letterSpacing: "-0.04em", lineHeight: 1.1, marginBottom: "1.25rem" }}>
+                Athena Clinic SO
+              </h2>
+              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1.0625rem", color: "#7AACAC", lineHeight: 1.7, marginBottom: "2rem" }}>
+                O sistema de gestão que aprende com os dados da sua clínica e devolve isso como inteligência — para você tomar a decisão certa, no momento certo.
               </p>
-
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 14, marginBottom: "2.5rem" }}>
-                <Link href="/contato">
-                  <a className="btn-primary" style={{ fontSize: "1rem", padding: "1rem 2rem" }}>
-                    Agendar diagnóstico grátis <ArrowRight className="w-5 h-5" />
-                  </a>
-                </Link>
-                <a href={WPP_URL} target="_blank" rel="noopener noreferrer" className="btn-ghost" style={{ fontSize: "1rem", padding: "1rem 2rem" }}>
-                  Falar no WhatsApp
+              {[
+                "Atendimento autônomo no WhatsApp 24h",
+                "Gestão financeira com DRE em tempo real",
+                "IA que conhece sua operação por dentro",
+                "Do agendamento ao fechamento — tudo integrado",
+              ].map((item, i) => (
+                <div key={i} style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
+                  <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#5EC4BC", flexShrink: 0 }} />
+                  <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.9375rem", color: "#7AACAC" }}>{item}</span>
+                </div>
+              ))}
+              <div style={{ display: "flex", gap: 14, marginTop: "2rem", flexWrap: "wrap" }}>
+                <a href="/athena-clinic-lp.html" className="btn-primary">
+                  Ver o Athena Clinic <ArrowRight style={{ width: 16, height: 16 }} />
                 </a>
-              </div>
-
-              <div style={{ display: "flex", flexWrap: "wrap", gap: "1.25rem" }}>
-                {["MVP validado em clínicas reais", "Sem fidelidade", "LGPD compliant"].map((item, i) => (
-                  <div key={i} style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                    <CheckCircle2 style={{ width: 16, height: 16, color: "#1B7A78", flexShrink: 0 }} />
-                    <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.8125rem", color: "#7A9898" }}>{item}</span>
-                  </div>
-                ))}
+                <Link href="/produtos"><a className="btn-ghost">Todos os produtos</a></Link>
               </div>
             </div>
 
-            {/* Right — Dashboard mockup */}
-            <div className="relative" style={{ display: "none" }}>
-              {/* Shown only lg+ via CSS below */}
-            </div>
-            <div className="hidden lg:block relative">
-              <div className="animate-float">
-                {/* Dashboard window */}
-                <div style={{ background: "#FFFFFF", border: "1px solid rgba(27,122,120,0.15)", borderRadius: 20, boxShadow: "0 24px 80px rgba(13,82,82,0.12)", overflow: "hidden" }}>
-                  {/* Window bar */}
-                  <div style={{ background: "#F7F7F8", padding: "12px 20px", borderBottom: "1px solid rgba(27,122,120,0.08)", display: "flex", alignItems: "center", gap: 8 }}>
-                    {["#1B7A78", "#5BB5B0", "#d1d5db"].map((c, i) => <div key={i} style={{ width: 10, height: 10, borderRadius: "50%", background: c }} />)}
-                    <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.625rem", color: "#7A9898", marginLeft: 10 }}>Athena Clinic SO — Dashboard</span>
+            {/* Visual card */}
+            <div>
+              <div className="card-glow" style={{ padding: 2, borderRadius: 20 }}>
+                <div style={{ background: "#0D1A1A", borderRadius: 18, overflow: "hidden" }}>
+                  <div style={{ background: "#080E0E", padding: "12px 20px", borderBottom: "1px solid rgba(94,196,188,0.08)", display: "flex", alignItems: "center", gap: 8 }}>
+                    {["#1B7A78", "#5EC4BC", "#162828"].map((c, i) => <div key={i} style={{ width: 10, height: 10, borderRadius: "50%", background: c }} />)}
+                    <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.625rem", color: "#3A6868", marginLeft: 10 }}>Athena Clinic SO — Painel Principal</span>
                   </div>
-
                   <div style={{ padding: 24, display: "flex", flexDirection: "column", gap: 16 }}>
-                    {/* KPIs */}
                     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10 }}>
                       {[
-                        { label: "Faturamento", value: "R$48.2k", trend: "↑ +12%" },
-                        { label: "Agendamentos", value: "183", trend: "↑ +8%" },
-                        { label: "Satisfação", value: "4.9/5", trend: "★★★★★" },
-                      ].map((kpi, i) => (
-                        <div key={i} style={{ background: "#F7F7F8", border: "1px solid rgba(27,122,120,0.08)", borderRadius: 10, padding: "12px" }}>
-                          <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.5625rem", color: "#7A9898", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 5 }}>{kpi.label}</div>
-                          <div style={{ fontFamily: "'Sora', sans-serif", fontWeight: 700, fontSize: "1rem", color: "#0D5252", marginBottom: 3 }}>{kpi.value}</div>
-                          <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.5625rem", color: "#1B7A78" }}>{kpi.trend}</div>
+                        { l: "Faturamento", v: "R$48.2k", t: "↑ 12%" },
+                        { l: "Agendamentos", v: "183", t: "↑ 8%" },
+                        { l: "Satisfação", v: "4.9/5", t: "★★★★★" },
+                      ].map((k, i) => (
+                        <div key={i} style={{ background: "#080E0E", border: "1px solid rgba(94,196,188,0.08)", borderRadius: 10, padding: 12 }}>
+                          <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.5rem", color: "#3A6868", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 5 }}>{k.l}</div>
+                          <div style={{ fontFamily: "'Sora', sans-serif", fontWeight: 700, fontSize: "0.9375rem", color: "#E8F0F0", marginBottom: 3 }}>{k.v}</div>
+                          <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.5rem", color: "#5EC4BC" }}>{k.t}</div>
                         </div>
                       ))}
                     </div>
-
-                    {/* AI Chat */}
-                    <div style={{ background: "#F7F7F8", border: "1px solid rgba(27,122,120,0.08)", borderRadius: 10, padding: 16 }}>
-                      <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.5625rem", color: "#1B7A78", marginBottom: 10, display: "flex", alignItems: "center", gap: 5 }}>
+                    <div style={{ background: "#080E0E", border: "1px solid rgba(94,196,188,0.08)", borderRadius: 10, padding: 16 }}>
+                      <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.5rem", color: "#1B7A78", marginBottom: 10, display: "flex", alignItems: "center", gap: 5 }}>
                         <div style={{ width: 5, height: 5, borderRadius: "50%", background: "#1B7A78", animation: "pulse 2s infinite" }} />
-                        ATHENA IA — Consultor Pessoal
+                        IA ATHENA — CONSULTORA DA CLÍNICA
                       </div>
-                      <div style={{ background: "rgba(27,122,120,0.06)", borderRadius: 8, padding: "10px 12px", fontFamily: "'DM Sans', sans-serif", fontSize: "0.75rem", color: "#4A6868", lineHeight: 1.5, marginBottom: 8 }}>
-                        Seu faturamento cresceu 12% este mês. 24 pacientes aguardam na lista de espera para sextas. Recomendo ativar encaixes.
+                      <div style={{ background: "rgba(27,122,120,0.06)", borderRadius: 8, padding: "10px 12px", fontFamily: "'DM Sans', sans-serif", fontSize: "0.75rem", color: "#7AACAC", lineHeight: 1.5, marginBottom: 8 }}>
+                        Faturamento cresceu 12% este mês. 24 pacientes aguardam lista de espera nas sextas. Recomendo ativar encaixes — potencial de R$4.800 adicionais.
                       </div>
-                      <div style={{ alignSelf: "flex-end", background: "#EEEEF0", borderRadius: 8, padding: "8px 12px", fontFamily: "'DM Sans', sans-serif", fontSize: "0.75rem", color: "#7A9898", textAlign: "right" }}>
+                      <div style={{ background: "rgba(94,196,188,0.04)", border: "1px solid rgba(94,196,188,0.08)", borderRadius: 8, padding: "8px 12px", fontFamily: "'DM Sans', sans-serif", fontSize: "0.75rem", color: "#3A6868", textAlign: "right" }}>
                         Gere o relatório de comissões de outubro
                       </div>
                     </div>
-
-                    {/* Status */}
                     <div style={{ display: "flex", justifyContent: "space-between" }}>
-                      <div style={{ display: "flex", alignItems: "center", gap: 5, fontFamily: "'DM Mono', monospace", fontSize: "0.5625rem", color: "#7A9898" }}>
+                      <div style={{ display: "flex", alignItems: "center", gap: 5, fontFamily: "'DM Mono', monospace", fontSize: "0.5rem", color: "#3A6868" }}>
                         <div style={{ width: 5, height: 5, borderRadius: "50%", background: "#1B7A78", animation: "pulse 2s infinite" }} />
                         Agente WhatsApp ativo
                       </div>
-                      <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.5625rem", color: "#7A9898" }}>3 consultas atendidas agora</span>
+                      <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.5rem", color: "#3A6868" }}>3 atendimentos agora</span>
                     </div>
                   </div>
                 </div>
@@ -194,178 +204,47 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── STATS ── */}
-      <section style={{ background: "#0D5252", padding: "3.5rem 0" }}>
+      {/* POR QUE PRATTICA */}
+      <section style={{ padding: "6rem 0" }}>
         <div className="container">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div style={{ textAlign: "center", marginBottom: "3.5rem" }}>
+            <div className="badge" style={{ marginBottom: "1.25rem" }}>Nosso diferencial</div>
+            <h2 style={{ fontFamily: "'Sora', sans-serif", fontWeight: 700, fontSize: "clamp(1.875rem, 4vw, 3rem)", color: "#E8F0F0", letterSpacing: "-0.035em", lineHeight: 1.15 }}>
+              IA Nativa não é IA conectada.<br /><span className="text-gradient">É uma diferença que importa.</span>
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {[
-              { value: "+45%", label: "Eficiência operacional média" },
-              { value: "24/7", label: "Atendimento com agente IA" },
-              { value: "3x", label: "ROI médio em 12 meses" },
-              { value: "0", label: "Contatos perdidos no WhatsApp" },
-            ].map((s, i) => (
-              <div key={i} className="text-center">
-                <div style={{ fontFamily: "'Sora', sans-serif", fontWeight: 800, fontSize: "clamp(2rem, 4vw, 3rem)", color: "#5BB5B0", letterSpacing: "-0.04em", lineHeight: 1, marginBottom: 8 }}>{s.value}</div>
-                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.8125rem", color: "rgba(126,200,196,0.7)" }}>{s.label}</p>
+              { icon: <TrendingUp style={{ width: 20, height: 20 }} />, title: "Aprende com seu negócio", desc: "A inteligência dos nossos sistemas é construída a partir dos dados da sua própria operação. Não é um modelo genérico conectado por fora." },
+              { icon: <Shield style={{ width: 20, height: 20 }} />, title: "Seus dados ficam seus", desc: "Nenhuma informação da sua empresa alimenta sistemas externos. Armazenamento seguro, conformidade LGPD e exportação sob demanda." },
+              { icon: <Clock style={{ width: 20, height: 20 }} />, title: "Resultado desde o primeiro mês", desc: "Não vendemos promessa de longo prazo. Definimos métricas no início e medimos resultado desde a implementação." },
+            ].map((c, i) => (
+              <div key={i} className="card-surface" style={{ padding: "2rem" }}>
+                <div style={{ width: 44, height: 44, borderRadius: 12, background: "rgba(94,196,188,0.08)", border: "1px solid rgba(94,196,188,0.12)", display: "flex", alignItems: "center", justifyContent: "center", color: "#5EC4BC", marginBottom: "1.25rem" }}>{c.icon}</div>
+                <h3 style={{ fontFamily: "'Sora', sans-serif", fontWeight: 700, fontSize: "1.0625rem", color: "#E8F0F0", marginBottom: "0.625rem" }}>{c.title}</h3>
+                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.9375rem", color: "#7AACAC", lineHeight: 1.65 }}>{c.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── PROBLEMA ── */}
-      <section style={{ background: "#EEEEF0", padding: "6rem 0" }}>
-        <div className="container">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-            <div>
-              <div className="athena-badge mb-6">O problema</div>
-              <h2 style={{ fontFamily: "'Sora', sans-serif", fontWeight: 700, fontSize: "clamp(1.875rem, 4vw, 3rem)", color: "#0D5252", letterSpacing: "-0.035em", lineHeight: 1.15, marginBottom: "1.25rem" }}>
-                Sua clínica perde dinheiro<br />
-                <span className="text-gradient-teal">todo dia sem perceber.</span>
-              </h2>
-              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1.0625rem", color: "#4A6868", lineHeight: 1.65, marginBottom: "2.5rem" }}>
-                Não falta dedicação nem talento médico. Falta um sistema que faça a gestão trabalhar por você.
-              </p>
-              <Link href="/produtos">
-                <a className="btn-primary">Ver como o Athena resolve <ArrowRight className="w-4 h-4" /></a>
-              </Link>
-            </div>
-
-            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-              {pains.map((pain, i) => (
-                <div key={i} className="card-surface" style={{ padding: "18px 20px", display: "flex", alignItems: "flex-start", gap: 16 }}>
-                  <span style={{ fontSize: "1.375rem", flexShrink: 0, marginTop: 2 }}>{pain.icon}</span>
-                  <div>
-                    <div style={{ fontFamily: "'Sora', sans-serif", fontWeight: 600, fontSize: "0.9375rem", color: "#0D5252", marginBottom: 4 }}>{pain.title}</div>
-                    <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.875rem", color: "#4A6868", lineHeight: 1.55 }}>{pain.desc}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── ATHENA — PRODUTO ── */}
-      <section style={{ background: "#FFFFFF", padding: "6rem 0", borderTop: "1px solid rgba(27,122,120,0.08)" }}>
-        <div className="container">
-          <div className="text-center" style={{ marginBottom: "4rem" }}>
-            <div style={{ marginBottom: "1.5rem", display: "flex", justifyContent: "center" }}>
-              <AthenaLogo variant="full" size="lg" theme="light" />
-            </div>
-            <h2 style={{ fontFamily: "'Sora', sans-serif", fontWeight: 700, fontSize: "clamp(1.875rem, 4vw, 3rem)", color: "#0D5252", letterSpacing: "-0.035em", lineHeight: 1.15, marginBottom: "1rem" }}>
-              Tudo que sua clínica precisa,<br />
-              <span className="text-gradient-light">em um único sistema com IA.</span>
+      {/* CTA FINAL */}
+      <section style={{ background: "#080E0E", borderTop: "1px solid rgba(94,196,188,0.08)", padding: "6rem 0", position: "relative", overflow: "hidden" }}>
+        <div className="absolute inset-0 bg-dots" style={{ opacity: 0.4 }} />
+        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 60% 80% at 50% 50%, rgba(27,122,120,0.08) 0%, transparent 70%)" }} />
+        <div className="container" style={{ position: "relative", zIndex: 2, textAlign: "center" }}>
+          <div style={{ maxWidth: 680, margin: "0 auto" }}>
+            <div className="badge" style={{ marginBottom: "2rem" }}>Próximo passo</div>
+            <h2 style={{ fontFamily: "'Sora', sans-serif", fontWeight: 800, fontSize: "clamp(2rem, 5vw, 3.5rem)", color: "#E8F0F0", letterSpacing: "-0.04em", lineHeight: 1.1, marginBottom: "1.25rem" }}>
+              Pronto para transformar dados em<br /><span className="text-gradient">vantagem competitiva?</span>
             </h2>
-            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1.0625rem", color: "#4A6868", maxWidth: 560, margin: "0 auto", lineHeight: 1.65 }}>
-              Do WhatsApp ao relatório financeiro — 8 módulos integrados que eliminam planilhas, papéis e sistemas desconectados.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {features.map((feat, i) => (
-              <div key={i} className="card-surface group" style={{ padding: "28px 24px", cursor: "default" }}>
-                <div style={{ width: 44, height: 44, borderRadius: 12, background: "rgba(27,122,120,0.08)", border: "1px solid rgba(27,122,120,0.15)", display: "flex", alignItems: "center", justifyContent: "center", color: "#1B7A78", marginBottom: 18, transition: "transform 0.3s" }} className="group-hover:scale-110">
-                  {feat.icon}
-                </div>
-                <div className="athena-badge" style={{ fontSize: "0.6rem", marginBottom: 10 }}>{feat.tag}</div>
-                <h3 style={{ fontFamily: "'Sora', sans-serif", fontWeight: 700, fontSize: "1rem", color: "#0D5252", marginBottom: "0.5rem" }}>{feat.title}</h3>
-                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.875rem", color: "#4A6868", lineHeight: 1.65 }}>{feat.desc}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="text-center" style={{ marginTop: "3rem" }}>
-            <Link href="/produtos">
-              <a style={{ display: "inline-flex", alignItems: "center", gap: 8, fontFamily: "'DM Sans', sans-serif", fontSize: "0.9375rem", fontWeight: 500, color: "#1B7A78", textDecoration: "none" }}>
-                Ver todos os módulos <ChevronRight className="w-4 h-4" />
-              </a>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ── PLANOS ── */}
-      <section style={{ background: "#EEEEF0", padding: "6rem 0" }}>
-        <div className="container">
-          <div className="text-center" style={{ marginBottom: "3.5rem" }}>
-            <div className="athena-badge" style={{ marginBottom: "1.25rem" }}>Planos e Preços</div>
-            <h2 style={{ fontFamily: "'Sora', sans-serif", fontWeight: 700, fontSize: "clamp(1.875rem, 4vw, 3rem)", color: "#0D5252", letterSpacing: "-0.035em", marginBottom: "1rem" }}>
-              Transparência total. Sem surpresas.
-            </h2>
-            <p style={{ fontFamily: "'DM Sans', sans-serif", color: "#4A6868", maxWidth: 480, margin: "0 auto", lineHeight: 1.6 }}>
-              Mensalidade sem fidelidade. Upgrade ou cancelamento a qualquer momento.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {plans.map((plan, i) => (
-              <div key={i} className="relative rounded-2xl p-8 flex flex-col" style={{
-                background: plan.highlight ? "#1B7A78" : "#FFFFFF",
-                border: plan.highlight ? "none" : "1px solid rgba(27,122,120,0.12)",
-                boxShadow: plan.highlight ? "0 24px 60px rgba(13,82,82,0.20)" : "none",
-              }}>
-                {plan.highlight && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-                    <span style={{ background: "#0D5252", color: "#EEEEF0", fontFamily: "'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.10em", textTransform: "uppercase", padding: "4px 16px", borderRadius: 999, display: "block", whiteSpace: "nowrap" }}>
-                      Mais escolhido
-                    </span>
-                  </div>
-                )}
-
-                <h3 style={{ fontFamily: "'Sora', sans-serif", fontWeight: 700, fontSize: "1.25rem", color: plan.highlight ? "#EEEEF0" : "#0D5252", marginBottom: 4 }}>{plan.name}</h3>
-                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.8125rem", color: plan.highlight ? "rgba(238,238,240,0.7)" : "#7A9898", marginBottom: "1.25rem", lineHeight: 1.4 }}>{plan.ideal}</p>
-
-                <div style={{ display: "flex", alignItems: "baseline", gap: 4, marginBottom: "1.5rem" }}>
-                  <span style={{ fontFamily: "'Sora', sans-serif", fontWeight: 800, fontSize: plan.period ? "2.5rem" : "1.375rem", color: plan.highlight ? "#EEEEF0" : "#0D5252", letterSpacing: "-0.04em" }}>{plan.price}</span>
-                  {plan.period && <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.875rem", color: plan.highlight ? "rgba(238,238,240,0.6)" : "#7A9898" }}>{plan.period}</span>}
-                </div>
-
-                <ul style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: "2rem", flex: 1 }}>
-                  {plan.features.map((feat, j) => (
-                    <li key={j} style={{ display: "flex", alignItems: "flex-start", gap: 10 }}>
-                      <CheckCircle2 style={{ width: 16, height: 16, flexShrink: 0, marginTop: 2, color: plan.highlight ? "#7EC8C4" : "#1B7A78" }} />
-                      <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.875rem", color: plan.highlight ? "rgba(238,238,240,0.85)" : "#4A6868" }}>{feat}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <Link href="/contato">
-                  <a className={plan.highlight ? "btn-white" : "btn-ghost"} style={{ width: "100%", justifyContent: "center" }}>
-                    {plan.cta}
-                  </a>
-                </Link>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── CTA FINAL ── */}
-      <section className="section-teal" style={{ padding: "6rem 0", position: "relative", overflow: "hidden" }}>
-        <div className="absolute inset-0 bg-grid opacity-20" />
-        <div className="container relative z-10 text-center">
-          <div className="max-w-3xl mx-auto">
-            <div className="athena-badge athena-badge-dark mb-8" style={{ justifyContent: "center" }}>Próximo passo</div>
-            <h2 style={{ fontFamily: "'Sora', sans-serif", fontWeight: 800, fontSize: "clamp(2rem, 5vw, 3.5rem)", color: "#EEEEF0", letterSpacing: "-0.04em", lineHeight: 1.1, marginBottom: "1.5rem" }}>
-              Sua clínica trabalhando<br />
-              enquanto você descansa.
-            </h2>
-            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1.125rem", color: "rgba(238,238,240,0.75)", marginBottom: "2.5rem", lineHeight: 1.65 }}>
-              Agende um diagnóstico gratuito de 30 minutos. Mostramos ao vivo onde a IA pode reduzir custos e aumentar o faturamento da sua clínica.
+            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1.0625rem", color: "#7AACAC", marginBottom: "2.5rem", lineHeight: 1.65 }}>
+              Agende uma conversa com nossa equipe. Diagnóstico gratuito de 30 minutos — entendemos sua operação e mostramos onde a inteligência de dados pode gerar resultado.
             </p>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 14, justifyContent: "center" }}>
-              <Link href="/contato">
-                <a className="btn-white" style={{ fontSize: "1rem", padding: "1rem 2.5rem" }}>
-                  Agendar diagnóstico gratuito <ArrowRight className="w-5 h-5" />
-                </a>
-              </Link>
-              <a href={WPP_URL} target="_blank" rel="noopener noreferrer"
-                style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "1rem 2.5rem", background: "rgba(255,255,255,0.12)", color: "#EEEEF0", fontFamily: "'Sora', sans-serif", fontWeight: 600, fontSize: "1rem", borderRadius: 10, border: "1.5px solid rgba(255,255,255,0.25)", transition: "all 0.25s", textDecoration: "none" }}
-                onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,255,255,0.20)")}
-                onMouseLeave={e => (e.currentTarget.style.background = "rgba(255,255,255,0.12)")}>
-                Falar agora no WhatsApp
-              </a>
+              <Link href="/contato"><a className="btn-primary" style={{ fontSize: "1rem", padding: "1rem 2.5rem" }}>Agendar diagnóstico gratuito <ArrowRight style={{ width: 16, height: 16 }} /></a></Link>
+              <a href={WPP} target="_blank" rel="noopener noreferrer" className="btn-ghost" style={{ fontSize: "1rem", padding: "1rem 2.5rem" }}>Falar no WhatsApp</a>
             </div>
           </div>
         </div>
