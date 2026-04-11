@@ -1,10 +1,13 @@
 import { Link } from "wouter";
 import MainLayout from "@/components/MainLayout";
+import AnimatedMockup from "@/components/AnimatedMockup";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { ArrowRight, ChevronRight, BarChart3, Zap, Layers, TrendingUp, Shield, Clock, MessageSquare, Calendar, DollarSign, Brain } from "lucide-react";
 
 const WPP = "https://wa.me/5567993013370?text=" + encodeURIComponent("Olá! Quero conhecer as soluções da Prattica AI.");
 
 export default function Home() {
+  useScrollReveal();
   return (
     <MainLayout>
 
@@ -76,7 +79,7 @@ export default function Home() {
       {/* NÚMEROS — com contexto */}
       <section style={{ background: "#080E0E", borderTop: "1px solid rgba(94,196,188,0.08)", borderBottom: "1px solid rgba(94,196,188,0.08)", padding: "4rem 0" }}>
         <div className="container">
-          <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.6875rem", color: "#3A6868", textTransform: "uppercase", letterSpacing: "0.10em", textAlign: "center", marginBottom: "2.5rem" }}>
+          <p className="reveal" style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.6875rem", color: "#3A6868", textTransform: "uppercase", letterSpacing: "0.10em", textAlign: "center", marginBottom: "2.5rem" }}>
             O que a inteligência de dados entrega na prática
           </p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -86,7 +89,7 @@ export default function Home() {
               { v: "24/7", l: "Operação autônoma com IA nativa" },
               { v: "3 SaaS", l: "Produtos verticais em desenvolvimento ativo" },
             ].map((n, i) => (
-              <div key={i} style={{ textAlign: "center" }}>
+              <div key={i} className={`reveal stagger-${i + 1}`} style={{ textAlign: "center" }}>
                 <div style={{ fontFamily: "'Sora', sans-serif", fontWeight: 800, fontSize: "clamp(1.75rem, 3.5vw, 2.75rem)", color: "#5EC4BC", letterSpacing: "-0.04em", lineHeight: 1, marginBottom: 8 }}>{n.v}</div>
                 <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.8125rem", color: "#3A6868", lineHeight: 1.45 }}>{n.l}</p>
               </div>
@@ -120,7 +123,7 @@ export default function Home() {
                 { icon: <Zap style={{ width: 18, height: 18 }} />, pain: "Processos manuais que consomem tempo e geram erros", sol: "Automação que opera sem intervenção humana constante" },
                 { icon: <Layers style={{ width: 18, height: 18 }} />, pain: "Sistemas que não se integram", sol: "Arquitetura unificada com IA que aprende com sua operação" },
               ].map((item, i) => (
-                <div key={i} className="card-surface" style={{ padding: "1.5rem", display: "flex", gap: "1rem", alignItems: "flex-start" }}>
+                <div key={i} className={`card-surface reveal stagger-${i + 1}`} style={{ padding: "1.5rem", display: "flex", gap: "1rem", alignItems: "flex-start" }}>
                   <div style={{ width: 40, height: 40, borderRadius: 10, background: "rgba(94,196,188,0.08)", border: "1px solid rgba(94,196,188,0.12)", display: "flex", alignItems: "center", justifyContent: "center", color: "#5EC4BC", flexShrink: 0 }}>
                     {item.icon}
                   </div>
@@ -150,7 +153,7 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
+            <div className="reveal-left">
               {[
                 { icon: <MessageSquare style={{ width: 18, height: 18 }} />, t: "Atendimento autônomo 24h", d: "A ANA responde, agenda e tira dúvidas no WhatsApp sem precisar de recepcionista." },
                 { icon: <Calendar style={{ width: 18, height: 18 }} />, t: "Agenda inteligente", d: "Sem no-show, sem encaixe perdido, com lembretes automáticos e lista de espera." },
@@ -175,50 +178,9 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Dashboard mockup */}
-            <div>
-              <div className="card-glow" style={{ padding: 2, borderRadius: 20 }}>
-                <div style={{ background: "#0D1A1A", borderRadius: 18, overflow: "hidden" }}>
-                  <div style={{ background: "#080E0E", padding: "12px 20px", borderBottom: "1px solid rgba(94,196,188,0.08)", display: "flex", alignItems: "center", gap: 8 }}>
-                    {["#1B7A78", "#5EC4BC", "#162828"].map((c, i) => <div key={i} style={{ width: 10, height: 10, borderRadius: "50%", background: c }} />)}
-                    <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.625rem", color: "#3A6868", marginLeft: 10 }}>Athena Clinic SO — Painel Principal</span>
-                  </div>
-                  <div style={{ padding: 24, display: "flex", flexDirection: "column", gap: 16 }}>
-                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10 }}>
-                      {[
-                        { l: "Faturamento", v: "R$48.2k", t: "↑ 12%" },
-                        { l: "Agendamentos", v: "183", t: "↑ 8%" },
-                        { l: "Satisfação", v: "4.9/5", t: "★★★★★" },
-                      ].map((k, i) => (
-                        <div key={i} style={{ background: "#080E0E", border: "1px solid rgba(94,196,188,0.08)", borderRadius: 10, padding: 12 }}>
-                          <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.5rem", color: "#3A6868", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 5 }}>{k.l}</div>
-                          <div style={{ fontFamily: "'Sora', sans-serif", fontWeight: 700, fontSize: "0.9375rem", color: "#E8F0F0", marginBottom: 3 }}>{k.v}</div>
-                          <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.5rem", color: "#5EC4BC" }}>{k.t}</div>
-                        </div>
-                      ))}
-                    </div>
-                    <div style={{ background: "#080E0E", border: "1px solid rgba(94,196,188,0.08)", borderRadius: 10, padding: 16 }}>
-                      <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.5rem", color: "#1B7A78", marginBottom: 10, display: "flex", alignItems: "center", gap: 5 }}>
-                        <div style={{ width: 5, height: 5, borderRadius: "50%", background: "#1B7A78", animation: "pulse 2s infinite" }} />
-                        IA ATHENA — CONSULTORA DA CLÍNICA
-                      </div>
-                      <div style={{ background: "rgba(27,122,120,0.06)", borderRadius: 8, padding: "10px 12px", fontFamily: "'DM Sans', sans-serif", fontSize: "0.75rem", color: "#7AACAC", lineHeight: 1.5, marginBottom: 8 }}>
-                        Faturamento cresceu 12% este mês. 24 pacientes aguardam lista de espera nas sextas. Recomendo ativar encaixes — potencial de R$4.800 adicionais.
-                      </div>
-                      <div style={{ background: "rgba(94,196,188,0.04)", border: "1px solid rgba(94,196,188,0.08)", borderRadius: 8, padding: "8px 12px", fontFamily: "'DM Sans', sans-serif", fontSize: "0.75rem", color: "#3A6868", textAlign: "right" }}>
-                        Gere o relatório de comissões de outubro
-                      </div>
-                    </div>
-                    <div style={{ display: "flex", justifyContent: "space-between" }}>
-                      <div style={{ display: "flex", alignItems: "center", gap: 5, fontFamily: "'DM Mono', monospace", fontSize: "0.5rem", color: "#3A6868" }}>
-                        <div style={{ width: 5, height: 5, borderRadius: "50%", background: "#1B7A78", animation: "pulse 2s infinite" }} />
-                        Agente WhatsApp ativo
-                      </div>
-                      <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.5rem", color: "#3A6868" }}>3 atendimentos agora</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            {/* Dashboard mockup animado */}
+            <div className="reveal-right">
+              <AnimatedMockup />
             </div>
           </div>
         </div>
@@ -239,7 +201,7 @@ export default function Home() {
               { icon: <Shield style={{ width: 20, height: 20 }} />, title: "Seus dados ficam seus", desc: "Nenhuma informação alimenta sistemas externos. Armazenamento seguro, conformidade LGPD e exportação completa sob demanda." },
               { icon: <Clock style={{ width: 20, height: 20 }} />, title: "Resultado desde o primeiro mês", desc: "Definimos métricas no início e medimos desde o dia da implementação. Sem promessa de longo prazo, sem caixa preta." },
             ].map((c, i) => (
-              <div key={i} className="card-surface" style={{ padding: "2rem" }}>
+              <div key={i} className={`card-surface reveal stagger-${i + 1}`} style={{ padding: "2rem" }}>
                 <div style={{ width: 44, height: 44, borderRadius: 12, background: "rgba(94,196,188,0.08)", border: "1px solid rgba(94,196,188,0.12)", display: "flex", alignItems: "center", justifyContent: "center", color: "#5EC4BC", marginBottom: "1.25rem" }}>{c.icon}</div>
                 <h3 style={{ fontFamily: "'Sora', sans-serif", fontWeight: 700, fontSize: "1.0625rem", color: "#E8F0F0", marginBottom: "0.625rem" }}>{c.title}</h3>
                 <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.9375rem", color: "#7AACAC", lineHeight: 1.65 }}>{c.desc}</p>

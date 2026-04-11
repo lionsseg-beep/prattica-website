@@ -144,9 +144,13 @@ nav.scrolled{background:rgba(244,246,245,0.95);backdrop-filter:blur(20px);border
 .faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s;font-size:.9375rem;color:var(--text2);line-height:1.7;padding:0 22px;font-family:'DM Sans',sans-serif}
 .faq-item.open .faq-a{max-height:300px;padding:0 22px 18px}
 
+/* ── FOOTER ── */
+footer{background:#080E0E;border-top:1px solid rgba(27,122,120,0.10);padding:3rem 0 2rem}
+
 /* ── WPP FAB ── */
-.wpp-fab{position:fixed;bottom:24px;right:24px;z-index:999;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,0.4);transition:all .3s;text-decoration:none}
-.wpp-fab:hover{transform:scale(1.1);box-shadow:0 6px 30px rgba(37,211,102,0.6)}
+@keyframes wppPulse{0%{box-shadow:0 4px 20px rgba(37,211,102,0.4)}70%{box-shadow:0 0 0 14px rgba(37,211,102,0)}100%{box-shadow:0 4px 20px rgba(37,211,102,0.4)}}
+.wpp-fab{position:fixed;bottom:24px;right:24px;z-index:999;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;transition:all .3s;text-decoration:none;animation:wppPulse 2.5s ease-in-out infinite}
+.wpp-fab:hover{transform:scale(1.1);box-shadow:0 6px 30px rgba(37,211,102,0.6);animation:none}
 
 /* ── LGPD BLOCK ── */
 .lgpd-grid{display:grid;grid-template-columns:1fr;gap:12px}
@@ -155,8 +159,51 @@ nav.scrolled{background:rgba(244,246,245,0.95);backdrop-filter:blur(20px);border
 .lgpd-icon{font-size:1.125rem;flex-shrink:0;margin-top:2px}
 .lgpd-text{font-family:'DM Sans',sans-serif;font-size:.875rem;color:rgba(238,238,240,0.8);line-height:1.5}
 
-/* ── FOOTER ── */
-footer{background:#080E0E;border-top:1px solid rgba(27,122,120,0.10);padding:3rem 0 2rem}
+/* ── SCROLL REVEAL ── */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease}
+.reveal.revealed{opacity:1;transform:translateY(0)}
+.reveal-left{opacity:0;transform:translateX(-32px);transition:opacity .7s ease,transform .7s ease}
+.reveal-left.revealed{opacity:1;transform:translateX(0)}
+.reveal-right{opacity:0;transform:translateX(32px);transition:opacity .7s ease,transform .7s ease}
+.reveal-right.revealed{opacity:1;transform:translateX(0)}
+.reveal-scale{opacity:0;transform:scale(0.93);transition:opacity .6s ease,transform .6s ease}
+.reveal-scale.revealed{opacity:1;transform:scale(1)}
+.stagger-1{transition-delay:.05s}.stagger-2{transition-delay:.15s}.stagger-3{transition-delay:.25s}
+.stagger-4{transition-delay:.35s}.stagger-5{transition-delay:.45s}.stagger-6{transition-delay:.55s}
+
+/* ── CARD PRODUTO PRINCIPAL ── */
+.card-hero-product{
+  background:#fff;border:1px solid rgba(27,122,120,0.18);
+  border-radius:20px;
+  transition:border-color .4s ease,box-shadow .4s ease,transform .4s ease;
+  position:relative;overflow:hidden;
+}
+.card-hero-product:hover{
+  border-color:rgba(27,122,120,0.45);
+  box-shadow:0 0 60px rgba(27,122,120,0.15),0 20px 60px rgba(13,82,82,0.15);
+  transform:translateY(-6px);
+}
+@keyframes cardGlowPulse{
+  0%,100%{box-shadow:0 8px 32px rgba(13,82,82,0.08)}
+  50%{box-shadow:0 0 48px rgba(27,122,120,0.20),0 16px 48px rgba(13,82,82,0.15)}
+}
+.card-hero-product{animation:cardGlowPulse 3.5s ease-in-out infinite}
+
+/* ── TYPEWRITER CURSOR ── */
+.tw-cursor{color:var(--teal-accent);animation:blink 1s step-end infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* ── FEAT CARD hover melhorado ── */
+.feat-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:26px 22px;
+  transition:all .35s ease;cursor:default}
+.feat-card:hover{border-color:var(--border2);transform:translateY(-4px);
+  box-shadow:0 16px 48px rgba(13,82,82,0.10)}
+
+/* ── BTN PRIMARY com pulso ── */
+@keyframes ctaPulse{0%,100%{box-shadow:0 4px 20px rgba(27,122,120,0.25)}
+  50%{box-shadow:0 4px 32px rgba(34,160,157,0.50)}}
+.btn-primary{animation:ctaPulse 2.5s ease-in-out infinite}
+.btn-primary:hover{animation:none;box-shadow:0 8px 40px rgba(34,160,157,0.45)!important}
 .footer-inner{display:flex;flex-direction:column;gap:1.5rem;align-items:center;text-align:center}
 @media(min-width:768px){.footer-inner{flex-direction:row;justify-content:space-between;text-align:left}}
 .footer-copy{font-family:'DM Sans',sans-serif;font-size:.8125rem;color:#1E3A3A}
@@ -243,7 +290,7 @@ footer{background:#080E0E;border-top:1px solid rgba(27,122,120,0.10);padding:3re
       </div>
 
       <!-- Dashboard mockup -->
-      <div class="mock animate-float mock-wrapper" id="mock-desktop">
+      <div class="mock animate-float mock-wrapper card-hero-product reveal-right" id="mock-desktop">
         <div class="mock-bar">
           <div class="mock-dot" style="background:#1B7A78"></div>
           <div class="mock-dot" style="background:#5EC4BC"></div>
@@ -252,14 +299,14 @@ footer{background:#080E0E;border-top:1px solid rgba(27,122,120,0.10);padding:3re
         </div>
         <div class="mock-body">
           <div class="mock-kpis">
-            <div class="mock-kpi"><div class="mock-kpi-l">Faturamento</div><div class="mock-kpi-v">R$48.2k</div><div class="mock-kpi-t">↑ +12%</div></div>
-            <div class="mock-kpi"><div class="mock-kpi-l">Agendamentos</div><div class="mock-kpi-v">183</div><div class="mock-kpi-t">↑ +8%</div></div>
+            <div class="mock-kpi"><div class="mock-kpi-l">Faturamento</div><div class="mock-kpi-v" id="mock-fat">R$48.2k</div><div class="mock-kpi-t">↑ +12%</div></div>
+            <div class="mock-kpi"><div class="mock-kpi-l">Agendamentos</div><div class="mock-kpi-v" id="mock-agen">183</div><div class="mock-kpi-t">↑ +8%</div></div>
             <div class="mock-kpi"><div class="mock-kpi-l">Satisfação</div><div class="mock-kpi-v">4.9/5</div><div class="mock-kpi-t">★★★★★</div></div>
           </div>
           <div class="mock-chat">
             <div class="mock-chat-hdr"><div class="mock-live"></div>IA ATHENA — CONSULTORA DA CLÍNICA</div>
-            <div class="mock-msg">Faturamento cresceu 12% este mês. 24 pacientes aguardam lista de espera nas sextas — potencial de R$4.800 adicionais com encaixes.</div>
-            <div class="mock-msg-out">Gere o relatório de comissões de outubro</div>
+            <div class="mock-msg" id="mock-ai-msg"></div>
+            <div class="mock-msg-out" id="mock-user-msg"></div>
           </div>
           <div class="mock-status">
             <div class="mock-status-item"><div class="mock-live"></div>Agente WhatsApp ativo</div>
@@ -306,31 +353,31 @@ footer{background:#080E0E;border-top:1px solid rgba(27,122,120,0.10);padding:3re
         </p>
       </div>
       <div style="display:flex;flex-direction:column;gap:12px">
-        <div style="display:flex;align-items:flex-start;gap:14px;padding:18px 20px;background:#fff;border:1px solid rgba(27,122,120,0.10);border-radius:12px">
+        <div style="display:flex;align-items:flex-start;gap:14px;padding:18px 20px;background:#fff;border:1px solid rgba(27,122,120,0.10);border-radius:12px" class="reveal">
           <span style="font-size:1.375rem;flex-shrink:0;margin-top:2px">📱</span>
           <div>
             <div style="font-family:'Sora',sans-serif;font-weight:600;font-size:.9375rem;color:#0D3333;margin-bottom:4px">Pacientes sem resposta no WhatsApp</div>
             <div style="font-size:.875rem;color:#4A7070;line-height:1.55">Sua recepção não dá conta. Cada mensagem ignorada é um paciente que agenda na concorrência.</div>
           </div>
-        </div><div style="display:flex;align-items:flex-start;gap:14px;padding:18px 20px;background:#fff;border:1px solid rgba(27,122,120,0.10);border-radius:12px">
+        </div><div style="display:flex;align-items:flex-start;gap:14px;padding:18px 20px;background:#fff;border:1px solid rgba(27,122,120,0.10);border-radius:12px" class="reveal">
           <span style="font-size:1.375rem;flex-shrink:0;margin-top:2px">📋</span>
           <div>
             <div style="font-family:'Sora',sans-serif;font-weight:600;font-size:.9375rem;color:#0D3333;margin-bottom:4px">Agenda com faltas e horários vagos</div>
             <div style="font-size:.875rem;color:#4A7070;line-height:1.55">Horários que deveriam estar gerando faturamento ficam em branco. Nenhuma confirmação automática.</div>
           </div>
-        </div><div style="display:flex;align-items:flex-start;gap:14px;padding:18px 20px;background:#fff;border:1px solid rgba(27,122,120,0.10);border-radius:12px">
+        </div><div style="display:flex;align-items:flex-start;gap:14px;padding:18px 20px;background:#fff;border:1px solid rgba(27,122,120,0.10);border-radius:12px" class="reveal">
           <span style="font-size:1.375rem;flex-shrink:0;margin-top:2px">💸</span>
           <div>
             <div style="font-family:'Sora',sans-serif;font-weight:600;font-size:.9375rem;color:#0D3333;margin-bottom:4px">Financeiro que só fecha no fim do mês</div>
             <div style="font-size:.875rem;color:#4A7070;line-height:1.55">Quando o estrago já está feito. Você não sabe hoje o que entrou e saiu ontem.</div>
           </div>
-        </div><div style="display:flex;align-items:flex-start;gap:14px;padding:18px 20px;background:#fff;border:1px solid rgba(27,122,120,0.10);border-radius:12px">
+        </div><div style="display:flex;align-items:flex-start;gap:14px;padding:18px 20px;background:#fff;border:1px solid rgba(27,122,120,0.10);border-radius:12px" class="reveal">
           <span style="font-size:1.375rem;flex-shrink:0;margin-top:2px">👥</span>
           <div>
             <div style="font-family:'Sora',sans-serif;font-weight:600;font-size:.9375rem;color:#0D3333;margin-bottom:4px">Mais funcionários para cobrir mais demanda</div>
             <div style="font-size:.875rem;color:#4A7070;line-height:1.55">Cada contratação aumenta custo fixo e diminui margem. O problema não é de gente — é de processo.</div>
           </div>
-        </div><div style="display:flex;align-items:flex-start;gap:14px;padding:18px 20px;background:#fff;border:1px solid rgba(27,122,120,0.10);border-radius:12px">
+        </div><div style="display:flex;align-items:flex-start;gap:14px;padding:18px 20px;background:#fff;border:1px solid rgba(27,122,120,0.10);border-radius:12px" class="reveal">
           <span style="font-size:1.375rem;flex-shrink:0;margin-top:2px">🔄</span>
           <div>
             <div style="font-family:'Sora',sans-serif;font-weight:600;font-size:.9375rem;color:#0D3333;margin-bottom:4px">A clínica depende de você para tudo</div>
@@ -356,17 +403,17 @@ footer{background:#080E0E;border-top:1px solid rgba(27,122,120,0.10);padding:3re
     </div>
 
     <div style="max-width:800px;margin:0 auto">
-      <div class="story-block">
+      <div class="story-block reveal">
         <div class="story-num">O problema de mercado</div>
         <div class="story-h">Sistemas tradicionais armazenam dados. Não pensam.</div>
         <p class="story-p">Eles registram o que aconteceu — mas não analisam, não antecipam, não avisam quando algo está errado antes que você perceba. São arquivos digitais organizados. Não inteligência de negócio.</p>
       </div>
-      <div class="story-block">
+      <div class="story-block reveal">
         <div class="story-num">A solução Athena</div>
         <div class="story-h">O Athena aprende com os dados da sua própria clínica.</div>
         <p class="story-p">Não é um chatbot genérico conectado por fora. É um sistema fechado que processa cada consulta registrada, cada pagamento, cada padrão de agendamento — e com o tempo, conhece sua operação com profundidade técnica. A inteligência que ele entrega é exclusiva do seu negócio. Não é compartilhada. Não depende de ferramentas externas. É a sua clínica analisando a si mesma.</p>
       </div>
-      <div class="story-block" style="border-left-color:#0D5252;background:#0D5252">
+      <div class="story-block reveal" style="border-left-color:#0D5252;background:#0D5252">
         <div class="story-num" style="color:#5EC4BC">Seus dados ficam nos seus dados</div>
         <div class="story-h" style="color:#EEEEF0">Segurança que não precisa de asterisco.</div>
         <p class="story-p" style="color:rgba(238,238,240,0.8)">O Athena não usa as informações da sua clínica para treinar modelos externos. Não compartilha com terceiros. Não depende de plataformas abertas. Armazenamento seguro, conformidade total com a LGPD, exportação sob demanda. O que é da sua clínica, fica na sua clínica.</p>
@@ -388,42 +435,42 @@ footer{background:#080E0E;border-top:1px solid rgba(27,122,120,0.10);padding:3re
       </p>
     </div>
     <div class="feat-grid">
-      <div class="feat-card">
+      <div class="feat-card reveal">
         <div class="feat-icon">💬</div>
         <div class="feat-tag">Atendimento</div>
         <div class="feat-title">Agente no WhatsApp 24h</div>
         <p class="feat-desc">Atende pacientes, responde dúvidas e agenda consultas de forma autônoma. Zero contato perdido, zero funcionário extra.</p>
-      </div><div class="feat-card">
+      </div><div class="feat-card reveal">
         <div class="feat-icon">📅</div>
         <div class="feat-tag">Agenda</div>
         <div class="feat-title">Agendamento inteligente</div>
         <p class="feat-desc">Confirmações automáticas, lista de espera ativa e lembretes programados. Sua agenda cheia sem esforço operacional.</p>
-      </div><div class="feat-card">
+      </div><div class="feat-card reveal">
         <div class="feat-icon">👥</div>
         <div class="feat-tag">CRM</div>
         <div class="feat-title">Gestão de pacientes</div>
         <p class="feat-desc">Histórico completo, pipeline de relacionamento e reativação de inativos. Cada paciente com contexto completo.</p>
-      </div><div class="feat-card">
+      </div><div class="feat-card reveal">
         <div class="feat-icon">🩺</div>
         <div class="feat-tag">Prontuário</div>
         <div class="feat-title">Prontuário eletrônico</div>
         <p class="feat-desc">Digital, seguro e acessível em qualquer dispositivo. Anamnese estruturada e histórico clínico rastreável.</p>
-      </div><div class="feat-card">
+      </div><div class="feat-card reveal">
         <div class="feat-icon">💰</div>
         <div class="feat-tag">Financeiro</div>
         <div class="feat-title">Gestão financeira completa</div>
         <p class="feat-desc">Contas a pagar e receber, fluxo de caixa, comissões médicas e DRE em tempo real. Você sabe hoje como fechou ontem.</p>
-      </div><div class="feat-card">
+      </div><div class="feat-card reveal">
         <div class="feat-icon">💳</div>
         <div class="feat-tag">Pagamentos</div>
         <div class="feat-title">Integração com maquininha</div>
         <p class="feat-desc">Pagamentos integrados com baixa automática. Controle de parcelamentos e conferência simplificada.</p>
-      </div><div class="feat-card">
+      </div><div class="feat-card reveal">
         <div class="feat-icon">🧠</div>
         <div class="feat-tag">Inteligência</div>
         <div class="feat-title">Consultora IA da clínica</div>
         <p class="feat-desc">Analisa sua operação e entrega indicadores, alertas proativos, relatórios sob demanda e respostas fundamentadas nos seus dados.</p>
-      </div><div class="feat-card">
+      </div><div class="feat-card reveal">
         <div class="feat-icon">📈</div>
         <div class="feat-tag">Analytics</div>
         <div class="feat-title">Dashboards em tempo real</div>
@@ -489,7 +536,7 @@ footer{background:#080E0E;border-top:1px solid rgba(27,122,120,0.10);padding:3re
       </p>
     </div>
     <div class="plan-grid">
-      <div class="plan-card">
+      <div class="plan-card reveal">
         <div class="plan-name">Starter</div>
         <div class="plan-ideal">Para começar pelo atendimento automatizado</div>
         <div class="plan-price"><span class="plan-val" style="font-size:2.5rem">R$ 297</span><span class="plan-period">/mês</span></div>
@@ -498,7 +545,7 @@ footer{background:#080E0E;border-top:1px solid rgba(27,122,120,0.10);padding:3re
         </ul>
         <a href="https://wa.me/5567993013370?text=Ol%C3%A1%21+Quero+contratar+o+plano+Starter+do+Athena+Clinic+SO." target="_blank" class="btn btn-ghost" style="width:100%">Começar agora →</a>
       </div>
-      <div class="plan-card hl">
+      <div class="plan-card hl reveal stagger-2">
         <div class="plan-popular">Mais escolhido</div>
         <div class="plan-name">Pro</div>
         <div class="plan-ideal">Gestão completa com inteligência de dados</div>
@@ -508,7 +555,7 @@ footer{background:#080E0E;border-top:1px solid rgba(27,122,120,0.10);padding:3re
         </ul>
         <a href="https://wa.me/5567993013370?text=Ol%C3%A1%21+Quero+uma+demonstra%C3%A7%C3%A3o+do+plano+Pro+do+Athena+Clinic+SO." target="_blank" class="btn btn-primary" style="width:100%">Solicitar demonstração →</a>
       </div>
-      <div class="plan-card">
+      <div class="plan-card reveal">
         <div class="plan-name">Enterprise</div>
         <div class="plan-ideal">Clínicas de médio e grande porte</div>
         <div class="plan-price"><span class="plan-val" style="font-size:1.625rem">Sob consulta</span></div>
@@ -638,18 +685,91 @@ footer{background:#080E0E;border-top:1px solid rgba(27,122,120,0.10);padding:3re
 <script>
 const navbar=document.getElementById('navbar');
 window.addEventListener('scroll',()=>navbar.classList.toggle('scrolled',scrollY>60));
-// Show nav links on desktop
 if(window.innerWidth>=768){document.querySelector('.nav-links').style.display='flex'}
+
+// ── SCROLL REVEAL ──
+const revealObs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('revealed');
+      revealObs.unobserve(e.target);
+    }
+  });
+},{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale').forEach(el=>revealObs.observe(el));
+
+// ── FAQ ──
 function toggleFaq(btn){
   const item=btn.parentElement;
   const isOpen=item.classList.contains('open');
   document.querySelectorAll('.faq-item.open').forEach(el=>el.classList.remove('open'));
   if(!isOpen)item.classList.add('open');
 }
-// Animate on scroll
-const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.style.animationPlayState='running'}),{threshold:.1});
-document.querySelectorAll('.anim').forEach(el=>{el.style.animationPlayState='paused';obs.observe(el)});
-document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(a){e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth'})}});
+
+// ── SCROLL SUAVE ──
+document.addEventListener('click',e=>{
+  const a=e.target.closest('a[href^="#"]');
+  if(a){e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth'})}
+});
+
+// ── COUNTER ANIMADO (KPIs do mockup) ──
+function animateCounter(el, target, duration=1600, prefix='', suffix=''){
+  let start=0;
+  const step=target/(duration/16);
+  const timer=setInterval(()=>{
+    start+=step;
+    if(start>=target){el.textContent=prefix+target+suffix;clearInterval(timer);}
+    else el.textContent=prefix+Math.floor(start)+suffix;
+  },16);
+}
+
+// ── TYPEWRITER ──
+function typewriter(el, text, speed=22, onDone){
+  let i=0;
+  el.textContent='';
+  const cursor=document.createElement('span');
+  cursor.className='tw-cursor';
+  cursor.textContent='|';
+  el.appendChild(cursor);
+  const timer=setInterval(()=>{
+    if(i<text.length){
+      el.insertBefore(document.createTextNode(text[i]),cursor);
+      i++;
+    } else {
+      clearInterval(timer);
+      cursor.remove();
+      if(onDone) onDone();
+    }
+  },speed);
+}
+
+// ── MOCK ANIMADO ──
+let mockStarted=false;
+const mockEl=document.getElementById('mock-desktop');
+if(mockEl){
+  const mockObs=new IntersectionObserver(([entry])=>{
+    if(entry.isIntersecting && !mockStarted){
+      mockStarted=true;
+      mockObs.disconnect();
+
+      // KPIs counter
+      const fatEl=document.getElementById('mock-fat');
+      const agenEl=document.getElementById('mock-agen');
+      if(fatEl) animateCounter(fatEl,48,'R$','.2k');
+      if(agenEl) animateCounter(agenEl,183,'','',1400);
+
+      // IA typewriter
+      const aiMsg=document.getElementById('mock-ai-msg');
+      const userMsg=document.getElementById('mock-user-msg');
+      const AI_TEXT='Faturamento cresceu 12% este mês. 24 pacientes aguardam lista de espera nas sextas. Recomendo ativar encaixes — potencial de R$4.800 adicionais.';
+      const USER_TEXT='Gere o relatório de comissões de outubro';
+      if(aiMsg) setTimeout(()=>typewriter(aiMsg,AI_TEXT,22,()=>{
+        if(userMsg) setTimeout(()=>typewriter(userMsg,USER_TEXT,35),300);
+      }),400);
+    }
+  },{threshold:0.3});
+  mockObs.observe(mockEl);
+}
 </script>
 </body>
 </html>
