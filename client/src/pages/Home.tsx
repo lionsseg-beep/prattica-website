@@ -4,7 +4,7 @@ import AnimatedMockup from "@/components/AnimatedMockup";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { ArrowRight, ChevronRight, BarChart3, Zap, Layers, TrendingUp, Shield, Clock, MessageSquare, Calendar, DollarSign, Brain } from "lucide-react";
 
-const WPP = "https://wa.me/5567993013370?text=" + encodeURIComponent("Olá! Quero conhecer as soluções da Prattica AI.");
+const WPP = "https://wa.me/5567996622860?text=" + encodeURIComponent("Olá! Quero conhecer as soluções da Prattica AI.");
 
 export default function Home() {
   useScrollReveal();

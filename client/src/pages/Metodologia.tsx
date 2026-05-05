@@ -2,7 +2,7 @@ import MainLayout from "@/components/MainLayout";
 import { useState } from "react";
 import { Search, Settings, Package, GraduationCap, Heart, ArrowRight } from "lucide-react";
 
-const WPP = "https://wa.me/5567993013370?text=" + encodeURIComponent("Olá! Quero saber mais sobre a metodologia da Prattica AI.");
+const WPP = "https://wa.me/5567996622860?text=" + encodeURIComponent("Olá! Quero saber mais sobre a metodologia da Prattica AI.");
 
 const phases = [
   {

@@ -2,7 +2,7 @@ import MainLayout from "@/components/MainLayout";
 import { Link } from "wouter";
 import { ArrowRight, BarChart3, Zap, Layers, GraduationCap } from "lucide-react";
 
-const WPP = "https://wa.me/5567993013370?text=" + encodeURIComponent("Olá! Quero saber mais sobre as soluções da Prattica AI.");
+const WPP = "https://wa.me/5567996622860?text=" + encodeURIComponent("Olá! Quero saber mais sobre as soluções da Prattica AI.");
 
 const solucoes = [
   {

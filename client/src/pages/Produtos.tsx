@@ -1,7 +1,7 @@
 import MainLayout from "@/components/MainLayout";
 import { ArrowRight, ExternalLink, Clock } from "lucide-react";
 
-const WPP = "https://wa.me/5567993013370?text=" + encodeURIComponent("Olá! Quero ver uma demonstração do Athena Clinic SO.");
+const WPP = "https://wa.me/5567996622860?text=" + encodeURIComponent("Olá! Quero ver uma demonstração do Athena Clinic SO.");
 
 export default function Produtos() {
   return (

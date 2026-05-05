@@ -7,7 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { toast } from "sonner";
 import { Loader2, CheckCircle2 } from "lucide-react";
 
-const WPP = "5567993013370";
+const WPP = "5567996622860";
 
 interface FormData {
   nome: string;
@@ -129,7 +129,7 @@ export default function FormularioContato() {
         </div>
         <div>
           <label style={labelStyle}>Telefone / WhatsApp *</label>
-          <Input name="telefone" value={formData.telefone} onChange={handleChange} placeholder="(67) 99301-3370" style={inputStyle} disabled={loading} />
+          <Input name="telefone" value={formData.telefone} onChange={handleChange} placeholder="(67) 99662-2860" style={inputStyle} disabled={loading} />
         </div>
       </div>
 

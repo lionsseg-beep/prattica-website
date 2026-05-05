@@ -1,7 +1,7 @@
 import MainLayout from "@/components/MainLayout";
 import { ArrowRight, BookOpen, Video, Users, Award, PlayCircle, Clock } from "lucide-react";
 
-const WPP = "https://wa.me/5567993013370?text=" + encodeURIComponent("Olá! Quero saber mais sobre a Prattica Academy.");
+const WPP = "https://wa.me/5567996622860?text=" + encodeURIComponent("Olá! Quero saber mais sobre a Prattica Academy.");
 
 const cursos = [
   {

@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import PratticaAssistant from "./PratticaAssistant";
 import PratticaLogo from "./PratticaLogo";
 
-const WPP_URL = "https://wa.me/5567993013370?text=" + encodeURIComponent("Olá! Vim pelo site da Prattica AI e gostaria de saber mais.");
+const WPP_URL = "https://wa.me/5567996622860?text=" + encodeURIComponent("Olá! Vim pelo site da Prattica AI e gostaria de saber mais.");
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {
   const [scrolled, setScrolled] = useState(false);
@@ -162,7 +162,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
               <h5 style={{ fontFamily: "'Sora', sans-serif", fontWeight: 600, fontSize: "0.8125rem", color: "#E8F0F0", letterSpacing: "0.04em", marginBottom: "1.25rem", textTransform: "uppercase" }}>Contato</h5>
               <ul style={{ display: "flex", flexDirection: "column", gap: 14, listStyle: "none", padding: 0, margin: 0 }}>
                 {[
-                  { Icon: Phone, text: "(67) 99301-3370", href: WPP_URL },
+                  { Icon: Phone, text: "(67) 99662-2860", href: WPP_URL },
                   { Icon: Mail,  text: "contato@prattica.ai", href: "mailto:contato@prattica.ai" },
                   { Icon: MapPin, text: "Av. Afonso Pena, 4785\nThe Place, Torre 2, Sala 2007\nCampo Grande, MS", href: "#" },
                 ].map(({ Icon, text, href }, i) => (

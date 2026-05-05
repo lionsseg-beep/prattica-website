@@ -3,7 +3,7 @@ import FormularioContato from "@/components/FormularioContato";
 import { MessageCircle, Mail, MapPin, ArrowRight } from "lucide-react";
 import { Link } from "wouter";
 
-const WPP = "5567993013370";
+const WPP = "5567996622860";
 const WPP_MSG = encodeURIComponent("Olá! Vim pelo site da Prattica AI e gostaria de agendar uma demonstração do Athena Clinic SO.");
 const WPP_URL = `https://wa.me/${WPP}?text=${WPP_MSG}`;
 
@@ -11,7 +11,7 @@ const contatos = [
   {
     icon: <MessageCircle style={{ width: 20, height: 20 }} />,
     label: "WhatsApp",
-    value: "(67) 99301-3370",
+    value: "(67) 99662-2860",
     sub: "Resposta em minutos",
     href: WPP_URL,
     external: true,

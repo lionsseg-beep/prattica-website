@@ -1,7 +1,7 @@
 import MainLayout from "@/components/MainLayout";
 import { ArrowRight, Calendar, Tag, TrendingUp, Cpu, BookOpen } from "lucide-react";
 
-const WPP = "https://wa.me/5567993013370?text=" + encodeURIComponent("Olá! Vim pelo Radar da Prattica AI e quero saber mais.");
+const WPP = "https://wa.me/5567996622860?text=" + encodeURIComponent("Olá! Vim pelo Radar da Prattica AI e quero saber mais.");
 
 const posts = [
   {
